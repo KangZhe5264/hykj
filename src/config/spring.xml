@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+		<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+			<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+			<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/demo?useUnicode=true&amp;characterEncoding=UTF-8"></property>
+			<property name="user" value="root"></property>
+			<property name="password" value="root"></property>
+			<property name="initialPoolSize" value="1"></property>
+			<property name="maxPoolSize" value="4"></property>
+			<property name="minPoolSize" value="2"></property>
+		</bean>
+		
+		<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+			<property name="dataSource" ref="dataSource"></property>
+			<property name="packagesToScan" value="org.yang.javabeans"></property>
+			<property name="hibernateProperties">
+				<props>
+					<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+					<prop key="hibernate.show_sql">true</prop>
+					<!-- <prop key="hibernate.hbm2ddl.auto">create</prop> -->
+					<prop key="hibernate.format_sql">true</prop>
+				</props>
+			</property>
+		</bean>
+		
+		<bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
+			<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+		
+		<bean id="txManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+			<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+		
+		<tx:annotation-driven transaction-manager="txManager"/>
+		
+		<context:component-scan base-package="org.yang">
+			<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		</context:component-scan>
+		<!-- 
+		<tx:advice id="txadvice" transaction-manager="txManager">
+			<tx:attributes>
+				<tx:method name="insert*"/>
+			</tx:attributes>
+		</tx:advice>
+		
+		<aop:config>
+			<aop:pointcut expression="execution(* **.*(..))" id="pointCut"/>
+			<aop:advisor advice-ref="txadvice" pointcut-ref="pointCut"/>
+		</aop:config>
+		 -->
+		<!-- <context:component-scan base-package="org.titibang.yang"></context:component-scan> -->
+		
+		
+</beans>
