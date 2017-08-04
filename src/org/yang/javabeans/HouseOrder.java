@@ -18,6 +18,10 @@ import org.hibernate.annotations.GenericGenerator;
 
 public class HouseOrder implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5178116016647113862L;
 	// Fields
 
 	private String serail;
@@ -50,9 +54,9 @@ public class HouseOrder implements java.io.Serializable {
 	}
 
 	// Property accessors
-	@GenericGenerator(name = "generator", strategy = "uuid.string")
+	@GenericGenerator(name = "demo2", strategy = "uuid")
 	@Id
-	@GeneratedValue(generator = "generator")
+	@GeneratedValue(generator = "demo2")
 
 	@Column(name = "serail", unique = true, nullable = false)
 

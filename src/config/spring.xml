@@ -21,7 +21,7 @@
 		<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 			<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
 			<property name="jdbcUrl" value="jdbc:mysql://123.206.48.244:5191/hotel?useUnicode=true&amp;characterEncoding=UTF-8"></property>
-			<property name="user" value="admin"></property>
+			<property name="user" value="root"></property>
 			<property name="password" value="_hykj8888+"></property>
 			<property name="initialPoolSize" value="1"></property>
 			<property name="maxPoolSize" value="4"></property>

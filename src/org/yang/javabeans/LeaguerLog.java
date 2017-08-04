@@ -52,7 +52,7 @@ public class LeaguerLog implements java.io.Serializable {
 	}
 
 	// Property accessors
-	@GenericGenerator(name = "generator", strategy = "uuid.string")
+	@GenericGenerator(name = "generator", strategy = "uuid")
 	@Id
 	@GeneratedValue(generator = "generator")
 

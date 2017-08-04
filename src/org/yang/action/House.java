@@ -19,6 +19,6 @@ public class House {
 	{
 		request.setAttribute("arg", demoService.demo());
 		
-		return "index.jsp";
+		return "/index.jsp";
 	}
 }

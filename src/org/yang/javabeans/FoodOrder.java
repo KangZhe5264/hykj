@@ -46,9 +46,9 @@ public class FoodOrder implements java.io.Serializable {
 	}
 
 	// Property accessors
-	@GenericGenerator(name = "generator", strategy = "uuid.string")
+	@GenericGenerator(name = "demo1", strategy = "uuid")
 	@Id
-	@GeneratedValue(generator = "generator")
+	@GeneratedValue(generator = "demo1")
 
 	@Column(name = "serial", unique = true, nullable = false)
 
