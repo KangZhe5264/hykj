@@ -20,6 +20,10 @@ public class FoodOrder implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1988395585317474271L;
 	private String serial;
 	private FoodDepartment foodDepartment;
 	private String arriveTime;
