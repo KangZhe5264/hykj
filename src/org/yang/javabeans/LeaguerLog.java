@@ -21,6 +21,10 @@ public class LeaguerLog implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9014573862034748978L;
 	private String sequence;
 	private Leaguer leaguer;
 	private String type;

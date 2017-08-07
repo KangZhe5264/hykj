@@ -24,6 +24,10 @@ public class FoodDepartment implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9196336865361272687L;
 	private Integer id;
 	private String deptName;
 	private String uri;

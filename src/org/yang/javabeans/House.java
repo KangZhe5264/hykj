@@ -22,6 +22,10 @@ public class House implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -168857855349638657L;
 	private Integer id;
 	private String type;
 	private Boolean state;
