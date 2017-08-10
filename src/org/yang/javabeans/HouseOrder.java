@@ -1,5 +1,6 @@
 package org.yang.javabeans;
 
+import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,14 +19,11 @@ import org.hibernate.annotations.GenericGenerator;
 
 public class HouseOrder implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 5178116016647113862L;
 	// Fields
 
 	private String serail;
 	private House house;
+	private Leaguer leaguer;
 	private String arriveTime;
 	private String activeTime;
 	private String auditing;
@@ -33,6 +31,7 @@ public class HouseOrder implements java.io.Serializable {
 	private String contactPhone;
 	private Integer quantity;
 	private Double amount;
+	private Timestamp createTime;
 
 	// Constructors
 
@@ -41,9 +40,10 @@ public class HouseOrder implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public HouseOrder(House house, String arriveTime, String activeTime, String auditing, Boolean obligate,
-			String contactPhone, Integer quantity, Double amount) {
+	public HouseOrder(House house, Leaguer leaguer, String arriveTime, String activeTime, String auditing,
+			Boolean obligate, String contactPhone, Integer quantity, Double amount, Timestamp createTime) {
 		this.house = house;
+		this.leaguer = leaguer;
 		this.arriveTime = arriveTime;
 		this.activeTime = activeTime;
 		this.auditing = auditing;
@@ -51,12 +51,13 @@ public class HouseOrder implements java.io.Serializable {
 		this.contactPhone = contactPhone;
 		this.quantity = quantity;
 		this.amount = amount;
+		this.createTime = createTime;
 	}
 
 	// Property accessors
-	@GenericGenerator(name = "demo2", strategy = "uuid")
+	@GenericGenerator(name = "generator", strategy = "uuid.string")
 	@Id
-	@GeneratedValue(generator = "demo2")
+	@GeneratedValue(generator = "generator")
 
 	@Column(name = "serail", unique = true, nullable = false)
 
@@ -77,6 +78,17 @@ public class HouseOrder implements java.io.Serializable {
 
 	public void setHouse(House house) {
 		this.house = house;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "leaguer_fk", nullable = false)
+
+	public Leaguer getLeaguer() {
+		return this.leaguer;
+	}
+
+	public void setLeaguer(Leaguer leaguer) {
+		this.leaguer = leaguer;
 	}
 
 	@Column(name = "arrive_time", nullable = false, length = 300)
@@ -147,6 +159,16 @@ public class HouseOrder implements java.io.Serializable {
 
 	public void setAmount(Double amount) {
 		this.amount = amount;
+	}
+
+	@Column(name = "create_time", nullable = false, length = 19)
+
+	public Timestamp getCreateTime() {
+		return this.createTime;
+	}
+
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
 	}
 
 }

@@ -22,10 +22,6 @@ public class Leaguer implements java.io.Serializable {
 
 	// Fields
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4514023084162910290L;
 	private String openId;
 	private Vip vip;
 	private String userPhone;
@@ -34,6 +30,7 @@ public class Leaguer implements java.io.Serializable {
 	private Double history;
 	private String userPwd;
 	private Set<LeaguerLog> leaguerLogs = new HashSet<LeaguerLog>(0);
+	private Set<HouseOrder> houseOrders = new HashSet<HouseOrder>(0);
 
 	// Constructors
 
@@ -51,7 +48,7 @@ public class Leaguer implements java.io.Serializable {
 
 	/** full constructor */
 	public Leaguer(String openId, Vip vip, String userPhone, String userName, Double balance, Double history,
-			String userPwd, Set<LeaguerLog> leaguerLogs) {
+			String userPwd, Set<LeaguerLog> leaguerLogs, Set<HouseOrder> houseOrders) {
 		this.openId = openId;
 		this.vip = vip;
 		this.userPhone = userPhone;
@@ -60,6 +57,7 @@ public class Leaguer implements java.io.Serializable {
 		this.history = history;
 		this.userPwd = userPwd;
 		this.leaguerLogs = leaguerLogs;
+		this.houseOrders = houseOrders;
 	}
 
 	// Property accessors
@@ -144,6 +142,16 @@ public class Leaguer implements java.io.Serializable {
 
 	public void setLeaguerLogs(Set<LeaguerLog> leaguerLogs) {
 		this.leaguerLogs = leaguerLogs;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "leaguer")
+
+	public Set<HouseOrder> getHouseOrders() {
+		return this.houseOrders;
+	}
+
+	public void setHouseOrders(Set<HouseOrder> houseOrders) {
+		this.houseOrders = houseOrders;
 	}
 
 }
