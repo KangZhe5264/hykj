@@ -21,6 +21,10 @@ public class HouseOrder implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2251765524378369472L;
 	private String serail;
 	private House house;
 	private Leaguer leaguer;
@@ -55,7 +59,7 @@ public class HouseOrder implements java.io.Serializable {
 	}
 
 	// Property accessors
-	@GenericGenerator(name = "generator", strategy = "uuid.string")
+	@GenericGenerator(name = "generator", strategy = "uuid")
 	@Id
 	@GeneratedValue(generator = "generator")
 

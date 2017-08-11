@@ -21,6 +21,10 @@ public class LeaguerLog implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9014573862034748978L;
 	private String sequence;
 	private Leaguer leaguer;
 	private String type;
@@ -52,7 +56,7 @@ public class LeaguerLog implements java.io.Serializable {
 	}
 
 	// Property accessors
-	@GenericGenerator(name = "generator", strategy = "uuid.string")
+	@GenericGenerator(name = "generator", strategy = "uuid")
 	@Id
 	@GeneratedValue(generator = "generator")
 

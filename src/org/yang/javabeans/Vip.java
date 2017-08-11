@@ -22,6 +22,10 @@ public class Vip implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -60024426114371276L;
 	private Integer id;
 	private String levalName;
 	private String role;

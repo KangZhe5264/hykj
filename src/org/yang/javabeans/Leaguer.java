@@ -22,6 +22,10 @@ public class Leaguer implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3322272623138666326L;
 	private String openId;
 	private Vip vip;
 	private String userPhone;
