@@ -8,9 +8,9 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.stereotype.Repository;
 import org.yang.dao.LeaguerDAO;
 import org.yang.javabeans.Leaguer;
-import org.yang.javabeans.Vip;
 
 /**
  * LeaguerDAO接口的实现
@@ -19,6 +19,7 @@ import org.yang.javabeans.Vip;
  * 最后修改时间:2017年8月14日 下午9:35:38
  * @author 杨殊缘
  */
+@Repository
 public class LeaguerDaoImpl implements LeaguerDAO{
 
 	@Autowired
@@ -27,15 +28,8 @@ public class LeaguerDaoImpl implements LeaguerDAO{
 	@Override
 	public Leaguer getUserById(String openid) {
 		// TODO Auto-generated method stub
-		Map<String,Object> paramMap = new HashMap<String,Object>();
-		paramMap.put("openId", openid);
-		DetachedCriteria dc = DetachedCriteria.forClass(Leaguer.class);
-		dc.add(Restrictions.allEq(paramMap));
-		
-		@SuppressWarnings("unchecked")
-		List<Leaguer> leaguerList = (List<Leaguer>) hibernateTemplate.findByCriteria(dc);
-		
-		return leaguerList.get(0);
+		Leaguer leaguer = hibernateTemplate.load(Leaguer.class, openid);
+		return leaguer;
 	}
 
 	@Override
@@ -73,6 +67,5 @@ public class LeaguerDaoImpl implements LeaguerDAO{
 		List<Leaguer> leaguerList = (List<Leaguer>) hibernateTemplate.findByCriteria(dc);
 		return leaguerList;
 	}
-
 
 }

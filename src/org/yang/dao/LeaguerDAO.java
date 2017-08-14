@@ -6,7 +6,7 @@ import java.util.Map;
 import org.yang.javabeans.Leaguer;
 /**
  * @author yangwc
- * @function 
+ * @function Leaguer的DAO类接口
  */
 
 public interface LeaguerDAO {
