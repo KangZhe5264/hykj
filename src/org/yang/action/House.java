@@ -2,7 +2,6 @@ package org.yang.action;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +15,7 @@ import org.yang.formbeans.Destine;
 import org.yang.formbeans.HouseAndOrder;
 import org.yang.javabeans.HouseOrder;
 import org.yang.javabeans.Leaguer;
-import org.yang.service.DemoService;
+import org.yang.service.LeaguerService;
 import org.yang.service.impl.HouseServiceImpl;
 
 import utils.WXUtils;
@@ -36,7 +35,7 @@ public class House {
 	private HouseServiceImpl houseService;
 	
 	@Autowired
-	private LeaguerServiceImpl leaguerService;
+	private LeaguerService leaguerService;
 	
 	@RequestMapping("/index")
 	public String index(HttpServletRequest request , String code , String state)
@@ -45,7 +44,7 @@ public class House {
 		if(code == null || "".equals(code) || state == null || "".equals(state))
 			return "/Front-Root/404.html";
 		//将openid放置在会话域范围内
-		request.getSession().setAttribute("openid", WXUtils.getOpenId(code));
+		request.getSession().setAttribute("openid", WXUtils.getOpenId(request , code));
 		//将可以预定的房间放在页面中进行展示
 		request.setAttribute("house", houseService.canUseHouse());
 		
