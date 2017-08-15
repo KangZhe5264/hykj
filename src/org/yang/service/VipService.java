@@ -27,6 +27,13 @@ public interface VipService {
 	
 	/**  
 	 *   Add by yangwc 
+	 *   @function 会员种类的新增或修改
+	 *   @param Vip
+	 */
+	public void submit(Vip vip);
+	
+	/**  
+	 *   Add by yangwc 
 	 *   @function 删除会员种类
 	 *   @param Vip
 	 */

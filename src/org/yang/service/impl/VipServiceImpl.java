@@ -52,4 +52,10 @@ public class VipServiceImpl implements VipService{
 		List<Vip> vipList = vipDao.selectByParam(paramMap);
 		return vipList;
 	}
+
+	@Override
+	public void submit(Vip vip) {
+		// TODO Auto-generated method stub
+		vipDao.saveOrUpdate(vip);
+	}
 }

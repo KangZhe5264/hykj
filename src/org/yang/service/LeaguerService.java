@@ -28,6 +28,13 @@ public interface LeaguerService {
 	
 	/**  
 	 *   Add by yangwc 
+	 *   @function 会员信息提交（修改和新增）
+	 *   @param Leaguer
+	 */
+	public void submit(Leaguer Leaguer);
+	
+	/**  
+	 *   Add by yangwc 
 	 *   @function 删除会员
 	 *   @param Leaguer
 	 */

@@ -30,17 +30,19 @@ public class LeaguerFirm {
 		
 		leaguerService.removeLeaguer(leaguer);
 		
-		return "redirect:/LeaguerManage";
+		request.setAttribute("leaguerList", leaguerService.QueryAll());
+		
+		return "/Back-Root/leaguer/leaguer-manager.jsp";
 	}
 	
 	@RequestMapping("/LeaguerCreate")
-	public String vipCreate(HttpServletRequest request)
+	public String leaguerCreate(HttpServletRequest request)
 	{
 		Leaguer leaguer = (Leaguer) request.getAttribute("leaguer");
 		
 		leaguerService.create(leaguer);
 		
-		return "redirect:/LeaguerManage";
+		return "/Back-Root/leaguer/leaguer-manager.jsp";
 	}
 	
 	@RequestMapping("/LeaguerEdit")
@@ -50,6 +52,18 @@ public class LeaguerFirm {
 		
 		leaguerService.modify(leaguer);
 		
-		return "redirect:/LeaguerManage";
+		return "/Back-Root/leaguer/leaguer-manager.jsp";
+	}
+	
+	@RequestMapping("/LeaguerSubmit")
+	public String leaguerSubmit(HttpServletRequest request)
+	{
+		Leaguer leaguer = (Leaguer) request.getAttribute("leaguer");
+		
+		leaguerService.submit(leaguer);
+		
+		request.setAttribute("leaguerList", leaguerService.QueryAll());
+		
+		return "/Back-Root/leaguer/leaguer-manager.jsp";
 	}
 }

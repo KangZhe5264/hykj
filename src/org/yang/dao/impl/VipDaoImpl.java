@@ -57,4 +57,10 @@ public class VipDaoImpl implements VipDao{
 		return vipList;
 	}
 
+	@Override
+	public void saveOrUpdate(Vip vip) {
+		// TODO Auto-generated method stub
+		hibernateTemplate.saveOrUpdate(vip);
+	}
+
 }

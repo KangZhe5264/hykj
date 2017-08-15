@@ -6,6 +6,7 @@ import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +27,7 @@ import org.apache.hc.core5.http.entity.ContentType;
 import org.apache.hc.core5.http.entity.EntityUtils;
 import org.apache.hc.core5.http.entity.StringEntity;
 import org.apache.hc.core5.ssl.SSLContexts;
+import org.apache.hc.core5.ssl.TrustStrategy;
 import org.yang.formbeans.WXAccess_Token;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -52,9 +54,15 @@ public class WXUtils {
 		//ssl证书管理器加载
 		SSLContext sslcontext = null;
 		try {
-			sslcontext = SSLContexts.custom().loadTrustMaterial(new File("my.keystore"),"nopassword".toCharArray(),new TrustSelfSignedStrategy()).build();
-		} catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException | CertificateException
-				| IOException e) {
+			sslcontext = SSLContexts.custom().loadTrustMaterial(new TrustStrategy() {
+				
+				@Override
+				public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+					// TODO Auto-generated method stub
+					return false;
+				}
+			}).build();//(new File("my.keystore"),"nopassword".toCharArray(),new TrustSelfSignedStrategy()).build();
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.err.println("ssl证书加载失败");
 		}
@@ -181,18 +189,19 @@ public class WXUtils {
 	
 	private static String getGlobalAccess_token()
 	{
-		if(ACCESS_TOKEN.testAccess_token())
+		//排除空参数
+		if(ACCESS_TOKEN != null && ACCESS_TOKEN.testAccess_token())
 			return ACCESS_TOKEN.getAccess_token();
 		else
 		{
-			HttpGet get = new HttpGet("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET");
+			HttpGet get = new HttpGet("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx716bd29326d0d724&secret=a81a5e176bcd9b3d6a3c84094300e362");
 			try {
 				do{
 					//执行GET请求
 					CloseableHttpResponse response = httpClient.execute(get);
 					ACCESS_TOKEN = new ObjectMapper().readValue(EntityUtils.toString(response.getEntity()), WXAccess_Token.class);
-				}while(ACCESS_TOKEN != null && ACCESS_TOKEN.testAccess_token());
-				ACCESS_TOKEN.setBegin_time(LocalDateTime.now());
+					ACCESS_TOKEN.setBegin_time(LocalDateTime.now());
+				}while(!(ACCESS_TOKEN != null && ACCESS_TOKEN.testAccess_token()));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -204,6 +213,8 @@ public class WXUtils {
 			return ACCESS_TOKEN.getAccess_token();
 		}
 	}
+	
+	
 	
 	/**
 	 * 微信信息推送操作
@@ -219,15 +230,16 @@ public class WXUtils {
 		Map<String, Object> entity = new HashMap<String, Object>();
 
 		entity.put("touser", map.get("openid"));
-		entity.put("template_id", "");
+		entity.put("template_id", "SyiyjF0oW2qXnq8A8rISyMwGUGF-ytcomstfZNqWckQ");
 		entity.put("url", map.get("url"));
 		entity.put("miniprogram","{'appid':'xiaochengxuappid12345','pagepath':'index?foo=bar'}");
 		Map<String, Object> temp = new HashMap<String, Object>();
-		temp.put("first","{'value':'恭喜你购买成功！','color':'#173177'}");
-		temp.put("keynote1","{'value':'巧克力','color':'#173177'}");
-		temp.put("keynote2","{'value':'39.8元','color':'#173177'}");
-		temp.put("keynote3","{'value':'2014年9月22日','color':'#173177'}");
-		temp.put("remark","{'value':'欢迎再次购买！','color':'#173177'}");
+		Map<String, String> lin01 = new HashMap<String, String>();
+		Map<String, String> lin02 = new HashMap<String, String>();
+		lin01.put("value", map.get("leaguer"));
+		temp.put("leaguer",lin01);
+		lin02.put("value", map.get("check_num"));
+		temp.put("check_num",lin02);
 		
 		entity.put("data", temp);
 		//加载对应的json数据包--可能出现乱码
@@ -245,5 +257,13 @@ public class WXUtils {
 		}
 		
 		return true;
+	}
+	
+	public static void main(String[] args) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("leaguer", "杨先生");
+		map.put("openid", "oUOqQ1Z9YbgwrX15QdjlzEm7hJPk");
+		map.put("check_num", "000000");
+ 		sendOneToOneMsg(map);
 	}
 }

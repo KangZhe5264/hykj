@@ -27,6 +27,13 @@ public interface VipDao {
 	public void edit(Vip vip);
 	
 	/**
+	 *   Add by yangwc
+	 *   会员种类记录的新增或修改
+	 *   @param Vip
+	 */
+	public void saveOrUpdate(Vip vip);
+	
+	/**
 	 *   Add by yangwc  
 	 *   用于删除会员种类记录
 	 *   @param Vip

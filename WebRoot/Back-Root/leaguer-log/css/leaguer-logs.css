@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+
+body{font-family:'微软雅黑';color:rgb(0, 0, 0);}
+
+.search{width:98%;margin-top:26px;margin-right:auto;margin-left:auto;border-top-width:2px;border-right-width:2px;border-bottom-width:2px;border-left-width:2px;border-top-color:rgb(15, 59, 99);border-right-color:rgb(15, 59, 99);border-bottom-color:rgb(15, 59, 99);border-left-color:rgb(15, 59, 99);border-top-style:solid;border-right-style:solid;border-bottom-style:solid;border-left-style:solid;border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-right-radius:10px;border-bottom-left-radius:10px;background-color:#efefef;}
+
+.search-pro{width:100%;text-align:center;vertical-align:center;margin-top:1%;margin-bottom:1%;}
+
+.search-label{margin-left:1%;font-size:18px;font-weight:bold;line-height:1.38;}
+
+.search-input{margin-left:1%;font-size:18px;line-height:1.18;}
+
+.button{font-size:16px;line-height:1.18;}
+
+.button-add{float:left;font-size:16px;line-height:1.18;}
+
+.manager-list{font-size:20px;margin-top:5%;width:98%;margin-top:26px;margin-right:auto;margin-left:auto;border-top-width:2px;border-right-width:2px;border-bottom-width:2px;border-left-width:2px;border-top-color:rgb(15, 59, 99);border-right-color:rgb(15, 59, 99);border-bottom-color:rgb(15, 59, 99);border-left-color:rgb(15, 59, 99);border-top-style:solid;border-right-style:solid;border-bottom-style:solid;border-left-style:solid;border-top-left-radius:10px;border-top-right-radius:10px;border-bottom-right-radius:10px;border-bottom-left-radius:10px;background-color:#efefef;}
+
+.table-list{width:90%;margin-left:1%;margin-top:1%;margin-bottom:1%;text-align:center;}

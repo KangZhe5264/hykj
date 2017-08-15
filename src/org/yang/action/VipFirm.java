@@ -30,7 +30,9 @@ public class VipFirm {
 		
 		vipService.removeVip(vipper);
 		
-		return "redirect:/VipManage";
+		request.setAttribute("vipList", vipService.QueryAll());
+		
+		return "/Back-Root/vip/vip-manager.jsp";
 	}
 	
 	@RequestMapping("/VipCreate")
@@ -40,7 +42,9 @@ public class VipFirm {
 		
 		vipService.create(vipper);
 		
-		return "redirect:/VipManage";
+		request.setAttribute("vipList", vipService.QueryAll());
+		
+		return "/Back-Root/vip/vip-manager.jsp";
 	}
 	
 	@RequestMapping("/VipEdit")
@@ -50,6 +54,20 @@ public class VipFirm {
 		
 		vipService.modify(vipper);
 		
-		return "redirect:/VipManage";
+		request.setAttribute("vipList", vipService.QueryAll());
+		
+		return "/Back-Root/vip/vip-manager.jsp";
+	}
+	
+	@RequestMapping("/VipSubmit")
+	public String vipSubmit(HttpServletRequest request,Vip vip)
+	{
+//		Vip vipper = (Vip) request.getSession().getAttribute("vip");
+		
+		vipService.submit(vip);
+		
+		request.setAttribute("vipList", vipService.QueryAll());
+		
+		return "/Back-Root/vip/vip-manager.jsp";
 	}
 }

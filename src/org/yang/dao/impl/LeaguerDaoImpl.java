@@ -67,4 +67,10 @@ public class LeaguerDaoImpl implements LeaguerDAO{
 		return leaguerList;
 	}
 
+	@Override
+	public void SaveOrUpdate(Leaguer leaguer) {
+		// TODO Auto-generated method stub
+		hibernateTemplate.saveOrUpdate(leaguer);
+	}
+
 }

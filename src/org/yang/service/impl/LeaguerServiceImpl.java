@@ -70,4 +70,10 @@ public class LeaguerServiceImpl implements LeaguerService{
 		return leaguer;
 	}
 
+	@Override
+	public void submit(Leaguer Leaguer) {
+		// TODO Auto-generated method stub
+		leaguerDao.SaveOrUpdate(Leaguer);
+	}
+
 }

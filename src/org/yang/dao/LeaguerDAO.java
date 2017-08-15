@@ -30,6 +30,13 @@ public interface LeaguerDAO {
 	 */
 	public void Eidt(Leaguer leaguer);
 	
+	
+	/**
+	 * 会员新增或信息修改
+	 * @param leaguer 会员信息
+	 */
+	public void SaveOrUpdate(Leaguer leaguer);
+	
 	/**
 	 * 会员信息删除
 	 * @param leaguer 要删除的会员信息
