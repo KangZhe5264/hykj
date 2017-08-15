@@ -13,11 +13,11 @@
     		<div class="search-pro">
     			<form id="form-search">
 					<label class="search-label">会员等级</label>
-					<input class="search-input" name="levelName" value=""/>
+					<input class="search-input" name="where-levelName" value=""/>
 					<label class="search-label">会员电话</label>
-					<input class="search-input" name="levelName" value=""/>
+					<input class="search-input" name="where-userPhone" value=""/>
 					<label class="search-label">会员姓名</label>
-					<input class="search-input" name="levelName" value=""/>
+					<input class="search-input" name="where-userName" value=""/>
 				</form>
 				<button class="button">查 找</button>
 			</div>
@@ -49,21 +49,21 @@
     	<div class="manager-detail" align="center">
     		<form id="form-detail">
 	    		<div class="manager-pro">
-	    			<input class="manager-input" type="hidden" name="leaguer.openId" value=""/>
+	    			<input class="manager-input" type="hidden" name="openId" value=""/>
 					<label class="manager-label">会员姓名</label>
-					<input class="manager-input" name="leaguer.userName" value=""/>
+					<input class="manager-input" name="userName" value=""/>
 				</div>
 				<div class="manager-pro">
 					<label class="manager-label">会员等级</label>
-					<input class="manager-input" name="leaguer.vip.levalName" value=""/>
+					<input class="manager-input" name="levalName" value=""/>
 					<label class="manager-label">会员电话</label>
-					<input class="manager-input" name="leaguer.userPhone" value=""/>
+					<input class="manager-input" name="userPhone" value=""/>
 				</div>
 				<div class="manager-pro">
 					<label class="manager-label">账户余额</label>
-					<input class="manager-input" name="leaguer.balance" value=""/>
+					<input class="manager-input" name="balance" value=""/>
 					<label class="manager-label">累计充值</label>
-					<input class="manager-input" name="leaguer.history" value=""/>
+					<input class="manager-input" name="history" value=""/>
 				</div>
 			</form>
 			<div class="manager-pro">

@@ -1,11 +1,15 @@
 package org.yang.action;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.yang.javabeans.Leaguer;
+import org.yang.javabeans.Vip;
 import org.yang.service.LeaguerService;
 
 @Controller
@@ -23,11 +27,35 @@ public class LeaguerFirm {
 		return "/Back-Root/leaguer/leaguer-manager.jsp";
 	}
 	
-	@RequestMapping("/LeaguerDelete")
-	public String leaguerDelete(HttpServletRequest request)
+	@RequestMapping("/LeaguerCondition")
+	public String leaguerCondition(HttpServletRequest request)
 	{
-		Leaguer leaguer = (Leaguer) request.getAttribute("leaguer");
+		String cod1 = request.getParameter("where-levelName");
+		String cod2 = request.getParameter("where-userPhone");
+		String cod3 = request.getParameter("where-userName");
 		
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		
+		if(!"".equals(cod1) && cod1 != null){
+			paramMap.put("vip.levalName", cod1);
+		}
+		
+		if(!"".equals(cod2) && cod2 != null){
+			paramMap.put("userPhone", cod2);
+		}
+		
+		if(!"".equals(cod3) && cod3 != null){
+			paramMap.put("userName", cod3);
+		}
+		
+		request.setAttribute("leaguerList", leaguerService.QueryByCondition(paramMap));
+		
+		return "/Back-Root/leaguer/leaguer-manager.jsp";
+	}
+	
+	@RequestMapping("/LeaguerDelete")
+	public String leaguerDelete(HttpServletRequest request,Leaguer leaguer)
+	{
 		leaguerService.removeLeaguer(leaguer);
 		
 		request.setAttribute("leaguerList", leaguerService.QueryAll());
@@ -36,9 +64,8 @@ public class LeaguerFirm {
 	}
 	
 	@RequestMapping("/LeaguerCreate")
-	public String leaguerCreate(HttpServletRequest request)
+	public String leaguerCreate(HttpServletRequest request,Leaguer leaguer)
 	{
-		Leaguer leaguer = (Leaguer) request.getAttribute("leaguer");
 		
 		leaguerService.create(leaguer);
 		
@@ -46,9 +73,8 @@ public class LeaguerFirm {
 	}
 	
 	@RequestMapping("/LeaguerEdit")
-	public String leaguerEdit(HttpServletRequest request)
+	public String leaguerEdit(HttpServletRequest request,Leaguer leaguer)
 	{
-		Leaguer leaguer = (Leaguer) request.getAttribute("leaguer");
 		
 		leaguerService.modify(leaguer);
 		
@@ -56,9 +82,9 @@ public class LeaguerFirm {
 	}
 	
 	@RequestMapping("/LeaguerSubmit")
-	public String leaguerSubmit(HttpServletRequest request)
+	public String leaguerSubmit(HttpServletRequest request,Leaguer leaguer,Vip vip)
 	{
-		Leaguer leaguer = (Leaguer) request.getAttribute("leaguer");
+		leaguer.setVip(vip);
 		
 		leaguerService.submit(leaguer);
 		

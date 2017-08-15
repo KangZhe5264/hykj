@@ -12,13 +12,15 @@
     	<div class="search">
     		<div class="search-pro">
 				<label class="search-label">订单号</label>
-				<input class="search-input" name="where.sequence" value=""/>
+				<input class="search-input" name="where-sequence" value=""/>
 				<label class="search-label">订单类型</label>
-				<input class="search-input" name="where.type" value=""/>
+				<input class="search-input" name="where-type" value=""/>
 				<label class="search-label">会员姓名</label>
-				<input class="search-input" name="where.userName" value=""/>
+				<input class="search-input" name="where-userName" value=""/>
+				<br>
 				<label class="search-label">订单时间</label>
-				<input class="search-input" name="where.createTime" value=""/>
+				<input class="search-input" name="where-lowTime" value=""/>-
+				<input class="search-input" name="where-highTime" value=""/>
 				<button class="button">查 找</button>
 			</div>
     	</div>

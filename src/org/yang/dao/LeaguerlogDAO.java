@@ -1,5 +1,6 @@
 package org.yang.dao;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -32,5 +33,5 @@ public interface LeaguerlogDAO {
 	 * @function log的条件查询
 	 * @param paramMap<K,V>
 	 */
-	public List<LeaguerLog> seletLogByCondition(Map<String,Object> paramMap);
+	public List<LeaguerLog> seletLogByCondition(Map<String,Object> paramMap,String lo,String hi);
 }

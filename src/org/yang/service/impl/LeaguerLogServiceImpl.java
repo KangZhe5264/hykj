@@ -1,5 +1,6 @@
 package org.yang.service.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -36,9 +37,9 @@ public class LeaguerLogServiceImpl implements LeaguerLogService{
 	}
 
 	@Override
-	public List<LeaguerLog> queryByCondition(Map<String, Object> paramMap) {
+	public List<LeaguerLog> queryByCondition(Map<String, Object> paramMap,String lo,String hi) {
 		// TODO Auto-generated method stub
-		List<LeaguerLog> logs = leaguerLogDao.seletLogByCondition(paramMap);
+		List<LeaguerLog> logs = leaguerLogDao.seletLogByCondition(paramMap,lo,hi);
 		return logs;
 	}
 

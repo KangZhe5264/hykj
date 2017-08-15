@@ -7,6 +7,14 @@ $(function() {
 	$(".button_submit").attr("disabled", true); 
 	$(".button_delete").attr("disabled", true);
 	
+	$(".button").click(function(){
+		$.ajax({
+	        url: '/business/vip/VipCondition.java',
+	        type: 'POST',
+	        data: $('#form-detail').serialize()
+	    });
+	})
+	
 	$("tr[class='data']").click(function(){
 		$(this).siblings().css("background-color","");
 		$(this).css("background-color","orange");

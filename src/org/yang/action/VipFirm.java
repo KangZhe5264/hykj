@@ -1,5 +1,8 @@
 package org.yang.action;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +26,25 @@ public class VipFirm {
 		return "/Back-Root/vip/vip-manager.jsp";
 	}
 	
-	@RequestMapping("/VipDelete")
-	public String vipDelete(HttpServletRequest request)
+	@RequestMapping("/VipCondition")
+	public String vipCondition(HttpServletRequest request)
 	{
-		Vip vipper = (Vip) request.getAttribute("vip");
+		String cod1 = request.getParameter("where-levelName");
 		
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+		
+		if(!"".equals(cod1) && cod1 != null){
+			paramMap.put("levalName", cod1);
+		}
+		
+		request.setAttribute("vipList", vipService.QueryByCondition(paramMap));
+		
+		return "/Back-Root/vip/vip-manager.jsp";
+	}
+	
+	@RequestMapping("/VipDelete")
+	public String vipDelete(HttpServletRequest request,Vip vipper)
+	{
 		vipService.removeVip(vipper);
 		
 		request.setAttribute("vipList", vipService.QueryAll());
@@ -36,10 +53,8 @@ public class VipFirm {
 	}
 	
 	@RequestMapping("/VipCreate")
-	public String vipCreate(HttpServletRequest request)
+	public String vipCreate(HttpServletRequest request,Vip vipper)
 	{
-		Vip vipper = (Vip) request.getAttribute("vip");
-		
 		vipService.create(vipper);
 		
 		request.setAttribute("vipList", vipService.QueryAll());
@@ -48,10 +63,8 @@ public class VipFirm {
 	}
 	
 	@RequestMapping("/VipEdit")
-	public String vipEdit(HttpServletRequest request)
+	public String vipEdit(HttpServletRequest request,Vip vipper)
 	{
-		Vip vipper = (Vip) request.getAttribute("vip");
-		
 		vipService.modify(vipper);
 		
 		request.setAttribute("vipList", vipService.QueryAll());
@@ -60,14 +73,10 @@ public class VipFirm {
 	}
 	
 	@RequestMapping("/VipSubmit")
-	public String vipSubmit(HttpServletRequest request,Vip vip)
+	public void vipSubmit(HttpServletRequest request,Vip vip)
 	{
-//		Vip vipper = (Vip) request.getSession().getAttribute("vip");
-		
 		vipService.submit(vip);
 		
-		request.setAttribute("vipList", vipService.QueryAll());
-		
-		return "/Back-Root/vip/vip-manager.jsp";
+		request.getSession().setAttribute("vipList", vipService.QueryAll());
 	}
 }

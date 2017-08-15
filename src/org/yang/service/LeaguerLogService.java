@@ -1,5 +1,6 @@
 package org.yang.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -29,5 +30,5 @@ public interface LeaguerLogService {
 	 * @return List<LeaguerLog>
 	 * @function 用户记录的条件查询
 	 */
-	public List<LeaguerLog> queryByCondition(Map<String,Object> paramMap);
+	public List<LeaguerLog> queryByCondition(Map<String,Object> paramMap,String lo,String hi);
 }

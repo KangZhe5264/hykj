@@ -11,8 +11,10 @@
   	<body>
     	<div class="search">
     		<div class="search-pro">
-				<label class="search-label">会员等级</label>
-				<input class="search-input" name="levelName" value=""/>
+    			<form id="form-search">
+					<label class="search-label">会员等级</label>
+					<input class="search-input" name="where-levelName" value=""/>
+				</form>
 				<button class="button">查 找</button>
 			</div>
     	</div>
@@ -39,9 +41,9 @@
     	<div class="manager-detail" align="center">
     		<form id="form-detail">
 	    		<div class="manager-pro">
-	    			<input class="manager-input" type="hidden" name="id" value=""/>
+	    			<input class="manager-input" type="hidden" name="id" value=" "/>
 					<label class="manager-label">会员等级</label>
-					<input class="manager-input" name="levelName" value=""/>
+					<input class="manager-input" name="levalName" value=""/>
 					<label class="manager-label">到达金额</label>
 					<input class="manager-input" name="landmark" value=""/>
 				</div>

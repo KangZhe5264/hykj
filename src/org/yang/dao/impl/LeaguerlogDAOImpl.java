@@ -3,6 +3,8 @@ package org.yang.dao.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
@@ -49,13 +51,23 @@ public class LeaguerlogDAOImpl implements LeaguerlogDAO{
 	}
 
 	@Override
-	public List<LeaguerLog> seletLogByCondition(Map<String, Object> paramMap) {
+	public List<LeaguerLog> seletLogByCondition(Map<String, Object> paramMap,String lo,String hi) {
 		// TODO Auto-generated method stub
-		DetachedCriteria dc = DetachedCriteria.forClass(Leaguer.class);
-		dc.add(Restrictions.allEq(paramMap));
 		
+		String hql = "from LeaguerLog where 1=1";
+		Set<String> keys = paramMap.keySet();
+		for(String key : keys){
+			hql += "and" + key + "= '" + paramMap.get(key) +"'";
+		}
+		if(!"".equals(lo) && lo != null){
+			hql += "and" + "createTime > '" + lo + "'";
+		}
+		if(!"".equals(hi) && hi != null){
+			hql += "and" + "createTime < '" + hi + "'";
+		}
 		@SuppressWarnings("unchecked")
-		List<LeaguerLog> logs = (List<LeaguerLog>)hibernateTemplate.findByCriteria(dc);
+		List<LeaguerLog> logs = (List<LeaguerLog>) hibernateTemplate.find(hql, "");
+		
 		return logs;
 	}
 
