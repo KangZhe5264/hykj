@@ -259,11 +259,11 @@ public class WXUtils {
 		return true;
 	}
 	
-	public static void main(String[] args) {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("leaguer", "杨先生");
-		map.put("openid", "oUOqQ1Z9YbgwrX15QdjlzEm7hJPk");
-		map.put("check_num", "000000");
- 		sendOneToOneMsg(map);
-	}
+//	public static void main(String[] args) {
+//		Map<String, String> map = new HashMap<String, String>();
+//		map.put("leaguer", "杨先生");
+//		map.put("openid", "oUOqQ1Z9YbgwrX15QdjlzEm7hJPk");
+//		map.put("check_num", "000000");
+// 		sendOneToOneMsg(map);
+//	}
 }

@@ -42,6 +42,7 @@ public class HouseService implements HouseServiceImpl {
 	@Autowired
 	private LeaguerDAO leaguerDao;
 	
+	@Autowired
 	private HouseOrderDaoImpl houseOrderDao;
 	@Override
 	public List<House> canUseHouse() {
