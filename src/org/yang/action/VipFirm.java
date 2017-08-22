@@ -1,6 +1,8 @@
 package org.yang.action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.yang.javabeans.Vip;
 import org.yang.service.VipService;
 
@@ -19,15 +22,23 @@ public class VipFirm {
 	private VipService vipService;
 	
 	@RequestMapping("/VipManage")
-	public String vipManage(HttpServletRequest request)
+	public @ResponseBody List<Vip> vipManage(HttpServletRequest request)
 	{
-		request.setAttribute("vipList", vipService.QueryAll());
+		List<Vip> vips = new ArrayList<Vip>();
+		for(Vip vip:vipService.QueryAll()){
+			Vip v = new Vip();
+			v.setId(vip.getId());
+			v.setLandmark(vip.getLandmark());
+			v.setLevalName(vip.getLevalName());
+			v.setRole(vip.getRole());
+			vips.add(v);
+		}
 		
-		return "/Back-Root/vip/vip-manager.jsp";
+		return vips;
 	}
 	
 	@RequestMapping("/VipCondition")
-	public String vipCondition(HttpServletRequest request)
+	public @ResponseBody List<Vip> vipCondition(HttpServletRequest request)
 	{
 		String cod1 = request.getParameter("where-levelName");
 		
@@ -37,19 +48,35 @@ public class VipFirm {
 			paramMap.put("levalName", cod1);
 		}
 		
-		request.setAttribute("vipList", vipService.QueryByCondition(paramMap));
+		List<Vip> vips = new ArrayList<Vip>();
+		for(Vip vip:vipService.QueryByCondition(paramMap)){
+			Vip v = new Vip();
+			v.setId(vip.getId());
+			v.setLandmark(vip.getLandmark());
+			v.setLevalName(vip.getLevalName());
+			v.setRole(vip.getRole());
+			vips.add(v);
+		}
 		
-		return "/Back-Root/vip/vip-manager.jsp";
+		return vips;
 	}
 	
 	@RequestMapping("/VipDelete")
-	public String vipDelete(HttpServletRequest request,Vip vipper)
+	public @ResponseBody List<Vip> vipDelete(HttpServletRequest request,Vip vipper)
 	{
 		vipService.removeVip(vipper);
 		
-		request.setAttribute("vipList", vipService.QueryAll());
+		List<Vip> vips = new ArrayList<Vip>();
+		for(Vip vip:vipService.QueryAll()){
+			Vip v = new Vip();
+			v.setId(vip.getId());
+			v.setLandmark(vip.getLandmark());
+			v.setLevalName(vip.getLevalName());
+			v.setRole(vip.getRole());
+			vips.add(v);
+		}
 		
-		return "/Back-Root/vip/vip-manager.jsp";
+		return vips;
 	}
 	
 	@RequestMapping("/VipCreate")
@@ -73,10 +100,20 @@ public class VipFirm {
 	}
 	
 	@RequestMapping("/VipSubmit")
-	public void vipSubmit(HttpServletRequest request,Vip vip)
+	public @ResponseBody List<Vip> vipSubmit(HttpServletRequest request,Vip vip)
 	{
 		vipService.submit(vip);
 		
-		request.getSession().setAttribute("vipList", vipService.QueryAll());
+		List<Vip> vips = new ArrayList<Vip>();
+		for(Vip temp:vipService.QueryAll()){
+			Vip v = new Vip();
+			v.setId(temp.getId());
+			v.setLandmark(temp.getLandmark());
+			v.setLevalName(temp.getLevalName());
+			v.setRole(temp.getRole());
+			vips.add(v);
+		}
+		
+		return vips;
 	}
 }

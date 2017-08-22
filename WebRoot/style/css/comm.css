@@ -5,14 +5,14 @@
  * 修改时间:
  */
 *{margin: 0px; padding: 0px;}
-header{width: 100%; text-align: center; font-size: 1.8rem;}
+header{width: 100%; text-align: center; font-size: 5rem;}
 section{padding:0.4rem 0.7rem;}
-input{border-radius: 0.5rem; font-size: 1.4rem; padding: 0px 0.2rem;}
-
+input{border-radius: 0.5rem; font-size: 5rem; padding: 0px 0.2rem;}
+body{font-size: 5rem}
 
 
 /*--------------------------------------------------------------------------*/
-/*house/index*/.item{line-height: 2.5rem;font-size: 1.6rem;}
+/*house/index*/.item{line-height: 6rem;font-size: 3rem;}
 /*house/index*/.none{display: none;}
 /*house/index*/.house_manager{}
 /*house_manager*/.float-right{float: right;}
@@ -20,20 +20,22 @@ input{border-radius: 0.5rem; font-size: 1.4rem; padding: 0px 0.2rem;}
 /*house/index*/.yes{color: green;}
 /*house/index*/.no{color:red;}
 /*house/index*/#contact_phone{display: block; width: 100%;}
-/*house/index*/#quantity{width: 80%;}
-/*house/index*/#arrive_time{width: 12rem; text-align: right;}
-/*house/index*/#amount{width: 5rem; text-align: right;}
-/*house/index*/section>section>div{line-height: 2rem;}
-/*house/index*/section>footer>button{display: block; margin: auto; padding: 0.4rem 2.4rem;font-size: 1.8rem; border-width: 0px;}
-/*house_manager*/.house_manager>section>div{line-height: 2.5rem;}
-/*house_manager*/.house_manager>section>div>input{width: 5rem; text-align: right;}
-/*house_manager*/.house_manager>section>div>button{padding: 0.2rem 2rem; font-size: 1.2rem;border-radius: 0.5rem; border-width: 0px;}
-/*house_manager*/.house_manager>section>div>a{font-size: 1.2rem;}
+/*house/index*/#quantity{width: 80%; text-align: right;}
+/*house/index*/#arrive_time{width: 80%; text-align: right;}
+/*house/index*/#amount{width: 15rem; text-align: right;}
+/*house/index*/section>section>div{line-height: 8rem;}
+/*house/index*/section>footer>button{display: block; margin: auto; padding: 0.4rem 2.4rem; font-size: 6rem; border-width: 0px; margin-top: 1rem;}
+/*house_manager*/.house_manager{font-size: 1rem;}
+/*house_manager*/.house_manager>header{font-size: 2rem;}
+/*house_manager*/.house_manager>section>div{line-height: 2.5rem; font-size: 1.4rem;}
+/*house_manager*/.house_manager>section>div>input{width: 5rem; text-align: right; font-size: 1.2rem;}
+/*house_manager*/.house_manager>section>div>button{padding: 0.2rem 2rem; font-size: 1.4rem;border-radius: 0.5rem; border-width: 0px;}
+/*house_manager*/.house_manager>section>div>a{font-size: 1.6rem;}
 /*house_manager*/.house_manager>section{display: inline-block;}
 /*house_manager*/.house_manager>section{width: 60%;}
 /*house_manager*/.house_manager>section[class="float-right"]{width: 34%; border-left: 0.3rem solid red;}
-/*house_manager*/.house_manager>section[class="float-right"]>div{display: flex;text-align: center;}
-/*house_manager*/.house_manager>section[class="float-right"]>div>div{flex: auto;}
+/*house_manager*/.house_manager>section[class="float-right"]>div{display: flex;text-align: center; font-size: 1.6rem;}
+/*house_manager*/.house_manager>section[class="float-right"]>div>div{flex: auto; font-size: 1.8rem;}
 /*house_manager*/.house_manager>section[class="float-right"]>ul{list-style: none; font-size: 1.4rem;}
-/*house_manager*/.house_manager>section[class="float-right"]>ul>li>button{padding: 0.4rem 2rem; border-radius: 0.5rem;font-size: 1.8rem;}
+/*house_manager*/.house_manager>section[class="float-right"]>ul>li>button{padding: 0.4rem 2rem; border-radius: 0.5rem;font-size: 1.4rem;}
 /*house_manager*/.house_manager>section[class="float-right"]>ul>li{border:solid darkgray; border-width: 0px 0px 0.2rem; padding: 0.6rem 0px;}

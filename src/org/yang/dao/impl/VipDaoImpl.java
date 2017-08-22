@@ -60,7 +60,6 @@ public class VipDaoImpl implements VipDao{
 	@Override
 	public void saveOrUpdate(Vip vip) {
 		// TODO Auto-generated method stub
-		vip.setLeaguers(null);
 		hibernateTemplate.saveOrUpdate(vip);
 	}
 

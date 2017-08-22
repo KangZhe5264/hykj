@@ -31,11 +31,12 @@
 				</div>
 				<div>
 					<label for="arrive_time">您将于</label>
-					<input type="text" name="arrive_time" id="arrive_time" value="2017年12月12日" />到达
+					<br />
+					<input type="text" name="arrive_time" id="arrive_time" value="" />到达
 				</div>
 				<div>
 					<label for="active_time">届时,您将停留</label>
-					<input type="text" name="active_time" id="active_time" value="2天" />
+					<input type="text" name="active_time" id="active_time" value="1天" />
 				</div>
 			</section>
 			<footer>
@@ -53,7 +54,9 @@
 		</footer>
 		<script type="text/javascript" language="JavaScript" src="${pageContext.request.contextPath }/style/js/comm.js"></script>
 		<script type="text/javascript">
-			window.onload = function(){init_house_index();}
+			window.setTimeout(function() {
+				init_house_index();
+			}, 1000*5);
 		</script>
 	</body>
 </html>

@@ -13,10 +13,10 @@ function initRem()
 	var body = document.getElementsByTagName('body')[0];
 
 	var width = html.offsetWidth?html.offsetWidth/640 * 10:body.offsetWidth/640 * 10;//定制自适应信息
-	
+
 	//var width = $("html").innerWidth()/640 * 10;//定制自适应信息
 	html.style.fontSize = width + "px";
-//	html.style.width = html.offsetWidth +"px";
+
 	//兼容性设定
 	if(html.style.fontSize != (width + "px"))
 	{

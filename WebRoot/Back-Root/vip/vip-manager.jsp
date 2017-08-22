@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 	<head>
     	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -20,28 +19,22 @@
     	</div>
     	<div class="manager-list" align="center">
     		<table class="table-list" border="1" cellspacing="0" cellpadding="0">
-    			<tr>
-	    			<th>序 号</th>
-	    			<th>会员等级</th>
-	    			<th>到达金额</th>
-	    			<th>优惠方式</th>
-	    		</tr>
-	    		<c:if test="${not empty vipList}">
-		           	<c:forEach items="${vipList}" var="a" varStatus="s">
-						<tr class="data">
-							<td>${s.index}</td>
-							<td>${a.levalName}</td>
-							<td>${a.landmark}</td>
-							<td>${a.role}</td>
-						</tr>
-					</c:forEach>
-				</c:if>
+    			<thead>
+	    			<tr>
+		    			<th>序 号</th>
+		    			<th>会员编号</th>
+		    			<th>会员等级</th>
+		    			<th>到达金额</th>
+		    			<th>优惠方式</th>
+		    		</tr>
+    			</thead>
+    			<tbody></tbody>
     		</table>
     	</div>
     	<div class="manager-detail" align="center">
     		<form id="form-detail">
 	    		<div class="manager-pro">
-	    			<input class="manager-input" type="hidden" name="id" value=" "/>
+	    			<input class="manager-input" type="hidden" name="id" value=""/>
 					<label class="manager-label">会员等级</label>
 					<input class="manager-input" name="levalName" value=""/>
 					<label class="manager-label">到达金额</label>

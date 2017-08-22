@@ -1,6 +1,5 @@
 package utils;
 
-import java.io.File;
 import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
@@ -21,7 +20,7 @@ import org.apache.hc.client5.http.methods.CloseableHttpResponse;
 import org.apache.hc.client5.http.methods.HttpGet;
 import org.apache.hc.client5.http.methods.HttpPost;
 import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
-import org.apache.hc.client5.http.ssl.TrustSelfSignedStrategy;
+import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.ParseException;
 import org.apache.hc.core5.http.entity.ContentType;
 import org.apache.hc.core5.http.entity.EntityUtils;
@@ -45,27 +44,28 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class WXUtils {
 
 	private static CloseableHttpClient httpClient;//发送请求的工具
-	private static WXAccess_Token ACCESS_TOKEN;
-	
+	private static WXAccess_Token ACCESS_TOKEN;//全局access_token
+	private final static String APPID = "wx716bd29326d0d724";//公众号的appid
+	private final static String APPSECRET = "a81a5e176bcd9b3d6a3c84094300e362";//公众号密匙
 	
 	//预处理
 	static{
 		
 		//ssl证书管理器加载
 		SSLContext sslcontext = null;
-		try {
-			sslcontext = SSLContexts.custom().loadTrustMaterial(new TrustStrategy() {
-				
-				@Override
-				public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-					// TODO Auto-generated method stub
-					return false;
-				}
-			}).build();//(new File("my.keystore"),"nopassword".toCharArray(),new TrustSelfSignedStrategy()).build();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.err.println("ssl证书加载失败");
-		}
+			try {
+				sslcontext = SSLContexts.custom().loadTrustMaterial(new TrustStrategy() {
+					
+					@Override
+					public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+						// TODO Auto-generated method stub
+						return false;
+					}
+				}).build();
+			} catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException e) {
+				// TODO Auto-generated catch block
+				System.err.println("ssl证书加载失败");
+			}
 		
 		//仅允许TLSv1协议,可能出错
 		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext , new String[]{"TLSv1"},null,SSLConnectionSocketFactory.getDefaultHostnameVerifier());
@@ -157,15 +157,15 @@ public class WXUtils {
 		// TODO Auto-generated method stub
 		//排除空参数的影响
 		if(code == null || "".equals(code)) return null;
-		HttpGet get = new HttpGet("https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code="+code+"&grant_type=authorization_code");
+		HttpGet get = new HttpGet("https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + APPID + "&secret=" + APPSECRET + "&code="+code+"&grant_type=authorization_code");
 		WXAccess_Token access_token = null;
 		try {
 			do{
 				//执行GET请求
 				CloseableHttpResponse response = httpClient.execute(get);
 				access_token = new ObjectMapper().readValue(EntityUtils.toString(response.getEntity()), WXAccess_Token.class);
+				access_token.setBegin_time(LocalDateTime.now());
 			}while(access_token != null && access_token.testAccess_token());
-			access_token.setBegin_time(LocalDateTime.now());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -187,6 +187,10 @@ public class WXUtils {
 		return null;
 	}
 	
+	/**
+	 * 获取全局接口调用凭证
+	 * @return
+	 */
 	private static String getGlobalAccess_token()
 	{
 		//排除空参数
@@ -194,7 +198,7 @@ public class WXUtils {
 			return ACCESS_TOKEN.getAccess_token();
 		else
 		{
-			HttpGet get = new HttpGet("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx716bd29326d0d724&secret=a81a5e176bcd9b3d6a3c84094300e362");
+			HttpGet get = new HttpGet("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + APPID + "&secret=" + APPSECRET);
 			try {
 				do{
 					//执行GET请求
@@ -213,8 +217,6 @@ public class WXUtils {
 			return ACCESS_TOKEN.getAccess_token();
 		}
 	}
-	
-	
 	
 	/**
 	 * 微信信息推送操作
@@ -259,11 +261,24 @@ public class WXUtils {
 		return true;
 	}
 	
-//	public static void main(String[] args) {
-//		Map<String, String> map = new HashMap<String, String>();
-//		map.put("leaguer", "杨先生");
-//		map.put("openid", "oUOqQ1Z9YbgwrX15QdjlzEm7hJPk");
-//		map.put("check_num", "000000");
-// 		sendOneToOneMsg(map);
-//	}
+	/**
+	 * 手动创建公众号的菜单
+	 * @param entity 包含菜单创建的json包
+	 * @return 将创建是否成功作为返回
+	 */
+	public static boolean createMenu(HttpEntity entity)
+	{
+		HttpPost post = new HttpPost("https://api.weixin.qq.com/cgi-bin/menu/create?access_token=" + getGlobalAccess_token());
+		post.setEntity(entity);
+		
+		try {
+			CloseableHttpResponse response = httpClient.execute(post);
+			WXAccess_Token access_Token = new ObjectMapper().readValue(EntityUtils.toString(response.getEntity()), WXAccess_Token.class);
+			return "0".equals(access_Token.getErrcode());
+		} catch (IOException | ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
 }

@@ -24,13 +24,15 @@ public class FoodOrder implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1988395585317474271L;
+	private String userName;
 	private String serial;
-	private FoodDepartment foodDepartment;
+	private String food_department_fk;
 	private String arriveTime;
 	private String auditing;
-	private Boolean obligate;
+	private String obligate;
 	private String contactPhone;
-	private Integer quantity;
+	private String quantity;
+	private String openid;
 
 	// Constructors
 
@@ -39,14 +41,18 @@ public class FoodOrder implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public FoodOrder(FoodDepartment foodDepartment, String arriveTime, String auditing, Boolean obligate,
-			String contactPhone, Integer quantity) {
-		this.foodDepartment = foodDepartment;
+	public FoodOrder(String userName, String serial, String food_department_fk, String arriveTime, String auditing,
+			String obligate, String contactPhone, String quantity,String openid) {
+		super();
+		this.userName = userName;
+		this.serial = serial;
+		this.food_department_fk = food_department_fk;
 		this.arriveTime = arriveTime;
 		this.auditing = auditing;
 		this.obligate = obligate;
 		this.contactPhone = contactPhone;
 		this.quantity = quantity;
+		this.openid=openid;
 	}
 
 	// Property accessors
@@ -59,22 +65,17 @@ public class FoodOrder implements java.io.Serializable {
 	public String getSerial() {
 		return this.serial;
 	}
-
 	public void setSerial(String serial) {
 		this.serial = serial;
 	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "food_department_fk", nullable = false)
-
-	public FoodDepartment getFoodDepartment() {
-		return this.foodDepartment;
+	@Column(name = "user_name", nullable = false)
+	public String getUserName() {
+		return userName;
 	}
-
-	public void setFoodDepartment(FoodDepartment foodDepartment) {
-		this.foodDepartment = foodDepartment;
+	
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-
 	@Column(name = "arrive_time", nullable = false, length = 300)
 
 	public String getArriveTime() {
@@ -97,11 +98,11 @@ public class FoodOrder implements java.io.Serializable {
 
 	@Column(name = "obligate", nullable = false)
 
-	public Boolean getObligate() {
+	public String getObligate() {
 		return this.obligate;
 	}
 
-	public void setObligate(Boolean obligate) {
+	public void setObligate(String obligate) {
 		this.obligate = obligate;
 	}
 
@@ -117,12 +118,29 @@ public class FoodOrder implements java.io.Serializable {
 
 	@Column(name = "quantity", nullable = false)
 
-	public Integer getQuantity() {
+	public String getQuantity() {
 		return this.quantity;
 	}
 
-	public void setQuantity(Integer quantity) {
+	public void setQuantity(String quantity) {
 		this.quantity = quantity;
 	}
+	@Column(name = "food_department_fk", nullable = false)
+	public String getFood_department_fk() {
+		return food_department_fk;
+	}
+	
+	public void setFood_department_fk(String food_department_fk) {
+		this.food_department_fk = food_department_fk;
+	}
+	@Column(name = "openid", nullable = true)
+	public String getOpenid() {
+		return openid;
+	}
+
+	public void setOpenid(String openid) {
+		this.openid = openid;
+	}
+	
 
 }

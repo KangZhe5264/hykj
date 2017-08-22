@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />  
+		<title>会员注册</title>
+		<link rel="stylesheet" href="css/leaguer-repwd.css">
+	</head>
+<body>
+	<div class="head">
+		<br>
+		会员注册
+	</div>
+	<div class="main">
+		<form id="form-submit" action="/business/leaguer/LeaguerCreate.java" method="post">
+			<input type="hidden" name="id" value="8">
+			<input name="openId" value="8">
+			<table width="100%">
+				<tr>
+					<td align=right width=40% valign="middle">姓 名</td>
+					<td align=left width=50% valign="middle">
+						<input name="userName" placeholder="请输入您的姓名">
+					</td>
+				</tr>
+				<tr>
+					<td align=right valign="middle">手机号</td>
+					<td align=left valign="middle" >
+						<input name="userPhone" placeholder="请输入您的手机号码">
+					</td>
+				</tr>
+				<tr>
+					<td align=right valign="middle">验证码</td>
+					<td align=left valign="middle">
+						<input placeholder="请输入验证码">
+						<button>获取</button>
+					</td>
+				</tr>
+				<tr>
+					<td align=right valign="middle">支付密码</td>
+					<td align=left valign="middle" >
+						<input type="password" name="userPwd" placeholder="请输入验证码">	
+					</td>
+				</tr>
+				<tr>
+					<td align=center colspan=2>
+						<br>
+						<br>
+						<button>完成注册</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<script src="js/jquery-min.js"></script>
+  	<script src="js/leaguer-info.js"></script>
+</body>
+</html>

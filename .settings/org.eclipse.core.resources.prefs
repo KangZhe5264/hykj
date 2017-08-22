@@ -1,3 +1,10 @@
 eclipse.preferences.version=1
 encoding//WebRoot/WEB-INF/house/house_manager.jsp=UTF-8
+encoding//src/org/yang/action/FoodOrderAction.java=UTF-8
+encoding//src/org/yang/dao/FoodOrderDao.java=UTF-8
+encoding//src/org/yang/dao/impl/FoodOrderDaoImpl.java=UTF-8
+encoding//src/org/yang/javabeans/FoodOrder.java=UTF-8
+encoding//src/org/yang/service/FoodOrderService.java=UTF-8
+encoding//src/org/yang/service/impl/FoodOrderServiceImpl.java=UTF-8
+encoding//src/utils/HttpRequest.java=UTF-8
 encoding//src/utils/WXUtils.java=UTF-8

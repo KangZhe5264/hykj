@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,21 +53,25 @@ public class LeaguerlogDAOImpl implements LeaguerlogDAO{
 	public List<LeaguerLog> seletLogByCondition(Map<String, Object> paramMap,String lo,String hi) {
 		// TODO Auto-generated method stub
 		
-		String hql = "from LeaguerLog where 1=1";
+		String hql = "From LeaguerLog where 1=1";
 		Set<String> keys = paramMap.keySet();
 		for(String key : keys){
-			hql += "and" + key + "= '" + paramMap.get(key) +"'";
+			if("leaguer".equals(key)){
+				hql += " and leaguer.userName = '"+ ((Leaguer)paramMap.get("leaguer")).getUserName() + "'";
+			}else{
+				hql += " and " + key + " = '" + paramMap.get(key) +"'";
+			}
 		}
 		if(!"".equals(lo) && lo != null){
-			hql += "and" + "createTime > '" + lo + "'";
+			hql += " and " + "createTime > '" + lo + "'";
 		}
 		if(!"".equals(hi) && hi != null){
-			hql += "and" + "createTime < '" + hi + "'";
+			hql += " and " + "createTime < '" + hi + "'";
 		}
+		System.out.println(hql);
 		@SuppressWarnings("unchecked")
-		List<LeaguerLog> logs = (List<LeaguerLog>) hibernateTemplate.find(hql, "");
+		List<LeaguerLog> logs = (List<LeaguerLog>) hibernateTemplate.find(hql, null);
 		
 		return logs;
 	}
-
 }

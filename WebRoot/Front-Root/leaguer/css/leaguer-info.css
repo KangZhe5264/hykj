@@ -1,0 +1,8 @@
+@CHARSET "UTF-8";
+
+body{font-family:'微软雅黑';color:white;}	
+
+.head{position:relative;width:98%;height:200px;background:rgb(251,168,15);margin:0 auto;text-align:center;}
+
+.main{position:relative;width:98%;height:440px;margin:0 auto;background:linear-gradient(rgb(251,168,15), white);}
+
