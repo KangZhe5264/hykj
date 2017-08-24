@@ -234,7 +234,7 @@ public class House {
 		for (HouseOrder order : list) {
 			Map<String, Object> map = new HashMap<String, Object>();
 			
-			map.put("house", order.getHouse().getId());
+			map.put("serail", order.getSerail());
 			map.put("type", order.getHouse().getType());
 			map.put("username", order.getLeaguer().getUserName());
 			map.put("arriveTime", order.getArriveTime());

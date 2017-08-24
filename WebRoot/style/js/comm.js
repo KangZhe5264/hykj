@@ -738,7 +738,7 @@ function refur_this()
 					if(data[index].auditing == "-1")
 					{
 						var li = document.createElement("li");
-						li.setAttribute("data",data[index].house);
+						li.setAttribute("data",data[index].serail);
 						wait.appendChild(li);
 						
 						var label = document.createElement("label");
