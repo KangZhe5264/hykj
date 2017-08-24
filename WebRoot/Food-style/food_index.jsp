@@ -17,15 +17,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="css/form.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-
+<%
+String openId=request.getParameter("openId");
+%>
 <div id="subjects">
-		<div class="form_ctrl page_head" id="1" title="订餐" style="color: white; background-color: rgb(255, 108, 0)"><h2>订餐</h2></div>
+		<div class="form_ctrl page_head" id="1" title="订餐" style="color: white; background-color: rgb(12, 152, 194)"><h2>订餐</h2></div>
 		
-						<div class="form_goods_image" style="background-image:url(images/v5_data/pic/z.jpg);" onClick="location.href='food_info.jsp?food_department_fk=中餐厅';"></div>
+						<div class="form_goods_image" style="background-image:url(images/v5_data/pic/z.jpg);" onClick="location.href='food_info.jsp?food_department_fk=中餐厅&openId=<%=openId%>';"></div>
+						<div class="form_goods_image" style="background-image:url(images/v5_data/pic/x.jpg);" onClick="location.href='food_info.jsp?food_department_fk=西餐厅&openId=<%=openId%>';"></div>
 						
-						<div class="form_goods_image" style="background-image:url(images/v5_data/pic/x.jpg);" onClick="location.href='food_info.jsp?food_department_fk=西餐厅';"></div>
-						
-						<div class="form_goods_image" style="background-image:url(images/v5_data/pic/h.jpg);" onClick="location.href='food_info.jsp?food_department_fk=汉餐厅';"></div>
+						<div class="form_goods_image" style="background-image:url(images/v5_data/pic/h.jpg);" onClick="location.href='food_info.jsp?food_department_fk=汉餐厅&openId=<%=openId%>';"></div>
 </div>
 
 <script src="js/vdata/form.min.js" type="text/javascript"></script>

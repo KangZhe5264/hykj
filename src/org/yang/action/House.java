@@ -40,12 +40,11 @@ public class House {
 	@RequestMapping("/index")
 	public String index(HttpServletRequest request , String code , String state)
 	{
-		System.out.println("code:"+code + "<>state:" + state);
 		//排除空参数的影响
 		if(code == null || "".equals(code) || state == null || "".equals(state))
 			return "/Front-Root/404.html";
 		//验证会员信息是否存在,不存在则进行会员绑定信息
-		
+		System.out.println("openid:" + WXUtils.getOpenId(request , code));
 		//将openid放置在会话域范围内
 		request.getSession().setAttribute("openid", WXUtils.getOpenId(request , code));
 		//将可以预定的房间放在页面中进行展示

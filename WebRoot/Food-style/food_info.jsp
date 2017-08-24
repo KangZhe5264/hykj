@@ -16,6 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="css/form.css" rel="stylesheet" type="text/css">
 <%
 String food_department_fk=request.getParameter("food_department_fk");
+String openId=request.getParameter("openId");
 %>
 </head>
 <body>
@@ -24,15 +25,12 @@ String food_department_fk=request.getParameter("food_department_fk");
 	<form id="main_form" action="/business/Food-style/FoodOrderFrontEndCreate.java" method="post" accept-charset="utf-8" style="padding-bottom: 4em;">
 	
 	
-		<div class="form_ctrl page_head" id="1" title="订房" style="color: white; background-color:  rgb(255, 108, 0)"><h2>订餐</h2></div>
+		<div class="form_ctrl page_head" id="1" title="订房" style="color: white; background-color:  rgb(12, 152, 194)"><h2>订餐</h2></div>
 		<div class="form_ctrl input_text" id="3" title="姓名">
 			<label class="ctrl_title">姓名</label>
 			<input type="text" name="userName" value="" placeholder="请输入姓名">
 		</div>
-		<div class="form_ctrl input_text" id="2" title="openid">
-			<label class="ctrl_title">openid</label>
-			<input type="text" name="openid" value="" placeholder="请输入openid">
-		</div>
+			<input type="text" style="display:none" name="openId" value="<%=openId%>">
 		<div class="form_ctrl input_text" id="4" title="联系电话">
 			<label class="ctrl_title">联系电话</label>
 			<input type="text" name="contactPhone" value="" placeholder="请输入电话号码">
@@ -62,12 +60,12 @@ String food_department_fk=request.getParameter("food_department_fk");
 	
 		<div class="form_ctrl form_submit" id="9" title="点击按钮预订房间">
 			<label class="ctrl_title">点击按钮预订</label>
-			<input type="submit" name="submit" value="提交" style="color: white; background-color: rgb(255, 108, 0);">
+			<input type="submit" name="submit" value="提交" style="color: white; background-color: rgb(12, 152, 194);">
 		
 		</div>
 			
 
-<a href="tel:15103522023" style="color: white; background-color: blue;padding:5px 20px;font-size:16px;font-weight:bold;text-decoration:none;border:1px solid blue;margin-left:10px">电话预定</a>
+<a href="tel:15103522023" style="color: white; background-color: rgb(12, 152, 194);padding:5px 20px;font-size:16px;font-weight:bold;text-decoration:none;border:1px solid rgb(12, 152, 194);margin-left:10px">电话预定</a>
 			</form>
 </div>
 

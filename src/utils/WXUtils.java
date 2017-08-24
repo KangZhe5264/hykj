@@ -281,4 +281,13 @@ public class WXUtils {
 		}
 		return false;
 	}
+	/**
+	 * 订餐成功后推送微信消息
+	 */
+	public static void sendMsg(String openid ,String userName,String arriveTime,String auditing){
+		String token=getGlobalAccess_token();
+		String jsonRespTextMessage = "{\"touser\":\""+openid+"\",\"template_id\":\"EiBUDMI28MVrJh9d0tTYU6GNezrslRs9_ARQsP5cUZ4\", \"data\":{\"user\": {\"value\":\""+userName+"\"},\"date\":{\"value\":\""+arriveTime+"\"}, \"result\": {\"value\":\""+auditing+"\"}}}";
+		HttpRequest.sendPost("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="+token, jsonRespTextMessage);
+		
+		}
 }

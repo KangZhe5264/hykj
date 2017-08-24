@@ -5,7 +5,7 @@
  * 修改时间:
  */
 *{margin: 0px; padding: 0px;}
-header{width: 100%; text-align: center; font-size: 5rem;}
+header{width: 100%; text-align: center; font-size: 5rem; background-color: rgb(12,152,194);}
 section{padding:0.4rem 0.7rem;}
 input{border-radius: 0.5rem; font-size: 5rem; padding: 0px 0.2rem;}
 body{font-size: 5rem}
@@ -14,7 +14,7 @@ body{font-size: 5rem}
 /*--------------------------------------------------------------------------*/
 /*house/index*/.item{line-height: 6rem;font-size: 3rem;}
 /*house/index*/.none{display: none;}
-/*house/index*/.house_manager{}
+/*house_manager*/.house_manager{}
 /*house_manager*/.float-right{float: right;}
 /*house_manager*/.current{color: red;}
 /*house/index*/.yes{color: green;}
@@ -24,7 +24,7 @@ body{font-size: 5rem}
 /*house/index*/#arrive_time{width: 80%; text-align: right;}
 /*house/index*/#amount{width: 15rem; text-align: right;}
 /*house/index*/section>section>div{line-height: 8rem;}
-/*house/index*/section>footer>button{display: block; margin: auto; padding: 0.4rem 2.4rem; font-size: 6rem; border-width: 0px; margin-top: 1rem;}
+/*house/index*/section>footer>button{display: block; margin: auto; padding: 0.4rem 2.4rem; font-size: 6rem; border-width: 0px; margin-top: 1rem; background-color: rgb(12,152,194);}
 /*house_manager*/.house_manager{font-size: 1rem;}
 /*house_manager*/.house_manager>header{font-size: 2rem;}
 /*house_manager*/.house_manager>section>div{line-height: 2.5rem; font-size: 1.4rem;}

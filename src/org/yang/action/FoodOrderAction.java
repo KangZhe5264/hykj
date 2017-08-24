@@ -1,7 +1,9 @@
 package org.yang.action;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,10 +11,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.yang.javabeans.FoodOrder;
 import org.yang.service.FoodOrderService;
 
 import utils.HttpRequest;
+import utils.WXUtils;
 
 
 
@@ -264,24 +269,21 @@ public class FoodOrderAction {
 		String arriveTime = request.getParameter("arriveTime");
 		String contactPhone = request.getParameter("userphone");
 		String quantity = request.getParameter("quantity");
-		String openid = "oUOqQ1fieqP6FsHQylmuUPpHFd5A";
-		String access_token="82d2jrHd_Pdch42hMfmzwdm7dv9_4l7ISuCT9adI2PgUnU7bX1mm67mLglRUNUAiWytzru5MLimtElePXUotzxe1Els4dpxQo9JpWBt6KAoBUWdACATMO";
+		String openid = request.getParameter("openid");
 		if (oper.equals("pass")) {
 			String auditing = "审核通过";
 			String obligate = "订单可用";
 			foodOrderService.modify(new FoodOrder(userName, serial, food_department_fk, arriveTime, auditing, obligate,
 					contactPhone, quantity, openid));
-			  
-			String jsonRespTextMessage = "{\"touser\":\""+openid+"\",\"template_id\":\"EiBUDMI28MVrJh9d0tTYU6GNezrslRs9_ARQsP5cUZ4\", \"data\":{\"user\": {\"value\":\""+userName+"\"},\"date\":{\"value\":\""+arriveTime+"\"}, \"result\": {\"value\":\""+auditing+"\"}}}";
-			HttpRequest.sendPost("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="+access_token, jsonRespTextMessage);
+			WXUtils.sendMsg(openid, userName, arriveTime, auditing);
+			
 			return "redirect:/Food-style/FoodOrderOfPass.java";
 		} else if (oper.equals("turn")) {
 			String auditing = "驳回";
 			String obligate = "订单取消";
 			foodOrderService.modify(new FoodOrder(userName, serial, food_department_fk, arriveTime, auditing, obligate,
 					contactPhone, quantity, openid));
-			String jsonRespTextMessage = "{\"touser\":\""+openid+"\",\"template_id\":\"EiBUDMI28MVrJh9d0tTYU6GNezrslRs9_ARQsP5cUZ4\", \"data\":{\"user\": {\"value\":\""+userName+"\"},\"date\":{\"value\":\""+arriveTime+"\"}, \"result\": {\"value\":\""+auditing+"\"}}}";
-			HttpRequest.sendPost("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="+access_token, jsonRespTextMessage);
+			WXUtils.sendMsg(openid, userName, arriveTime, auditing) ;
 			return "redirect:/Food-style/FoodOrderOfTurn.java";
 		} else {
 			return "redirect:/Food-style/FoodOrderInfo.java";
@@ -290,17 +292,18 @@ public class FoodOrderAction {
 
 	@RequestMapping("/FoodOrderFrontEndCreate")
 	public String foodOrderFrontEnd(HttpServletRequest request, FoodOrder foodOrder) {
-		String arriveTime = (String) request.getParameter("arriveTime");
-		String timeInterval = (String) request.getParameter("timeInterval");
-		String food_department_fk = (String) request.getParameter("food_department_fk");
-		System.out.println(food_department_fk);
+		String arriveTime =  request.getParameter("arriveTime");
+		String timeInterval =  request.getParameter("timeInterval");
+		String food_department_fk =  request.getParameter("food_department_fk");
+		String openId=request.getParameter("openId");
 		foodOrder.setArriveTime(arriveTime + timeInterval);
 		foodOrder.setAuditing("待审核");
 		foodOrder.setObligate("订单未生效");
 		foodOrder.setFood_department_fk(food_department_fk);
+		foodOrder.setOpenid(openId);
 		foodOrderService.create(foodOrder);
 
-		return "/Food-style/food_success.jsp";
+		return "/Food-style/food_success.jsp?openId="+openId;
 	}
 
 	@RequestMapping("/FoodOrderEnd")
@@ -314,5 +317,13 @@ public class FoodOrderAction {
 
 		return "/Food-style/login.jsp";
 	}
+	@RequestMapping("/FoodOrderAccess")
+	public String foodOrderAccess(HttpServletRequest request) {
+		String code=request.getParameter("code");
+		String openId=WXUtils.getOpenId(request, code);
+		return "/Food-style/food_index.jsp?openId="+openId;
+		
+	}
+	
 
 }

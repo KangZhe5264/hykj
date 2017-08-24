@@ -10,7 +10,7 @@
 	<body>
 		<header></header>
 		<section >
-			<header>惠业提供技术支持</header>
+			<header>客房</header>
 			<C:forEach items="${house }" var="h">
 				<div class="item yes" data="${h.id }">${h.type }-可以预定-${h.price }元每天</div>
 			</C:forEach>
@@ -54,9 +54,7 @@
 		</footer>
 		<script type="text/javascript" language="JavaScript" src="${pageContext.request.contextPath }/style/js/comm.js"></script>
 		<script type="text/javascript">
-			window.setTimeout(function() {
-				init_house_index();
-			}, 1000*5);
+			window.onload = function(){init_house_index();}
 		</script>
 	</body>
 </html>

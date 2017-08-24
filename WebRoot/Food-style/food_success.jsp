@@ -13,15 +13,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="format-detection" content="telephone=no">
 <title>订餐</title>
-
+<%
+String openId=request.getParameter("openId");
+%>
 <link href="css/form.css" rel="stylesheet" type="text/css">
 </head>
 <body style="background-color:#ffffff">
 
 <div id="subjects">
-		<div class="form_ctrl page_head" id="1" title="订餐" style="color: white; background-color: rgb(255, 108, 0)"><h2>订餐</h2></div>
+		<div class="form_ctrl page_head" id="1" title="订餐" style="color: white; background-color: rgb(12, 152, 194)"><h2>订餐</h2></div>
 		
-						<div class="form_goods_image" style="background-image:url(images/v5_data/pic/success.jpg);" onClick="location.href='/business/Food-style/food_index.jsp';"></div>
+						<div class="form_goods_image" style="background-image:url(images/v5_data/pic/success.jpg);" onClick="location.href='/business/Food-style/food_index.jsp?openId=<%=openId%>';"></div>
 </div>
 
 <script src="js/vdata/form.min.js" type="text/javascript"></script>
