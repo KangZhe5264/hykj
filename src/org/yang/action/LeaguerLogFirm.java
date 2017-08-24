@@ -1,5 +1,6 @@
 package org.yang.action;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.yang.javabeans.Leaguer;
 import org.yang.javabeans.LeaguerLog;
 import org.yang.service.LeaguerLogService;
+import org.yang.service.LeaguerService;
 
 /**
  * @author yangwc
@@ -26,6 +28,8 @@ public class LeaguerLogFirm {
 	
 	@Autowired
 	private LeaguerLogService leaguerLogService;
+	@Autowired
+	private LeaguerService leaguerService;
 	
 	@RequestMapping("/selectAll")
 	public @ResponseBody List<LeaguerLog> selectAll(HttpServletRequest request){
@@ -49,11 +53,21 @@ public class LeaguerLogFirm {
 	}
 	
 	@RequestMapping("/selectMine")
-	public String selectMine(HttpServletRequest request){
-		String openId = (String)request.getAttribute("openId");
-		request.setAttribute("logs", leaguerLogService.queryMine(openId));
+	public @ResponseBody List<LeaguerLog> selectMine(HttpServletRequest request){
 		
-		return "/Back-Root/LeaguerLog/leaguerLog-mine.jsp";
+		String openId = request.getParameter("openId");
+		List<LeaguerLog> leaguerLogs = leaguerLogService.queryMine(openId);
+		
+		List<LeaguerLog> newLogs = new ArrayList<LeaguerLog>();
+		
+		for(LeaguerLog temp : leaguerLogs){
+			LeaguerLog log = new LeaguerLog();
+			log.setWorths(temp.getWorths());
+			log.setInfo(temp.getCreateTime().toString());
+			newLogs.add(log);
+		}
+		
+		return newLogs;
 	}
 	
 	@RequestMapping("/selectByCondition")
@@ -96,4 +110,29 @@ public class LeaguerLogFirm {
 		return leaguerLogs;
 	}
 
+	@RequestMapping("/createLeaguerLog")
+	public @ResponseBody String createLog(HttpServletRequest request){
+		
+		String openId = request.getParameter("openId");
+		String balance = request.getParameter("balance");
+		
+		try{
+			Leaguer leaguer = new Leaguer();
+			leaguer = leaguerService.getUserByOpenid(openId);
+		
+			LeaguerLog leaguerLog = new LeaguerLog();
+			leaguerLog.setCreateTime(new Timestamp(System.currentTimeMillis()));
+			leaguerLog.setInfo("");
+			leaguerLog.setLeaguer(leaguer);
+			leaguerLog.setType("³ä Öµ");
+			leaguerLog.setWorths(Double.parseDouble(balance));
+			
+			leaguerLogService.createLog(leaguerLog);
+			
+			return "SUCCESS";
+		
+		}catch(Exception e){
+			return "ERROR";
+		}
+	}
 }

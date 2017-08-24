@@ -71,7 +71,7 @@ public class WXUtils {
 		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext , new String[]{"TLSv1"},null,SSLConnectionSocketFactory.getDefaultHostnameVerifier());
 		
 		//构建http客户端
-		httpClient = HttpClients.custom().setSSLSocketFactory(sslsf).build();;
+		httpClient = HttpClients.custom().setSSLSocketFactory(sslsf).build();
 	}
 	
 	/**
@@ -132,16 +132,22 @@ public class WXUtils {
 		{
 			WXAccess_Token access_token = getAccess_token(code);
 			request.getSession().setAttribute("access_token", access_token);
+			System.err.println("openid not in session:" + access_token.getOpenid());
 			return access_token.getOpenid();
 		}
 		else//session中存在必要的参数 access_token
 		{
 			WXAccess_Token access_token = (WXAccess_Token) session.getAttribute("access_token");
-			if(access_token.testOpenid()) return access_token.getOpenid();
+			if(access_token.testOpenid())
+			{
+				System.err.println("openid in session:" + access_token.getOpenid());
+				return access_token.getOpenid();
+			}
 			else//openid不可使用,需要重新获取
 			{
 				access_token = getAccess_token(code);
 				request.getSession().setAttribute("access_token", access_token);
+				System.err.println("openid in session can't use:" + access_token.getOpenid());
 				return access_token.getOpenid();
 			}
 		}
@@ -165,7 +171,8 @@ public class WXUtils {
 				CloseableHttpResponse response = httpClient.execute(get);
 				access_token = new ObjectMapper().readValue(EntityUtils.toString(response.getEntity()), WXAccess_Token.class);
 				access_token.setBegin_time(LocalDateTime.now());
-			}while(access_token != null && access_token.testAccess_token());
+				System.err.println("获取access_token..." + access_token.getOpenid());
+			}while(!(access_token != null && access_token.testAccess_token()));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

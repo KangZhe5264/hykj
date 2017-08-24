@@ -16,6 +16,8 @@ import org.yang.javabeans.Vip;
 import org.yang.service.LeaguerService;
 import org.yang.service.VipService;
 
+import utils.WXUtils;
+
 @Controller
 @RequestMapping("/leaguer")
 public class LeaguerFirm {
@@ -115,14 +117,34 @@ public class LeaguerFirm {
 	}
 	
 	@RequestMapping("/LeaguerCreate")
-	public String leaguerCreate(HttpServletRequest request,Leaguer leaguer,Vip vip)
+	public @ResponseBody String leaguerCreate(HttpServletRequest request)
 	{
+		String openId = request.getParameter("openId");
+		String userName = request.getParameter("userName");
+		String userPhone = request.getParameter("userPhone");
+		String userPwd = request.getParameter("userPwd");
+		String id = request.getParameter("id");
+		
+		Leaguer leaguer = new Leaguer();
+		
+		Vip vip = new Vip();
+		vip.setId(Integer.parseInt(id));
+		
 		leaguer.setVip(vip);
+		leaguer.setOpenId(openId);
+		leaguer.setUserName(userName);
+		leaguer.setUserPhone(userPhone);
+		leaguer.setUserPwd(userPwd);
 		leaguer.setBalance(0D);
 		leaguer.setHistory(0D);
-		leaguerService.create(leaguer);
 		
-		return "/Back-Root/leaguer/leaguer-manager.jsp";
+		try{
+			leaguerService.create(leaguer);
+			return "SUCCESS";
+		}catch(Exception e){
+			return "ERROR";
+		}
+		
 	}
 	
 	@RequestMapping("/LeaguerFind")
@@ -142,11 +164,17 @@ public class LeaguerFirm {
 		
 		temp.setUserName(leaguer.getUserName());
 		
+		temp.setUserPhone(leaguer.getUserPhone());
+		
 		v.setLevalName(leaguer.getVip().getLevalName());
 		
 		temp.setVip(v);
 		
 		temp.setBalance(leaguer.getBalance());
+		
+		temp.setHistory(leaguer.getHistory());
+		
+		temp.setUserPwd(leaguer.getUserPwd());
 		
 		return temp;
 	}
@@ -159,17 +187,12 @@ public class LeaguerFirm {
 		Leaguer temp = new Leaguer();
 		
 		if("REPWD".equals(type)){
-			String oldpwd = request.getParameter("oldPwd");
 			String openId = request.getParameter("openId");
+			String userPwd = request.getParameter("userPwd");
 			temp = leaguerService.getUserByOpenid(openId);
-			if(oldpwd.equals(temp.getUserPwd())){
-				String userPwd = request.getParameter("userPwd");
-				temp.setUserPwd(userPwd);
-				leaguerService.modify(temp);
-				msg = "SUCCESS";
-			}else{
-				msg = "≥ı º√‹¬Î¥ÌŒÛ";
-			}
+			temp.setUserPwd(userPwd);
+			leaguerService.modify(temp);
+			msg = "SUCCESS";
 		}else if("RECHARGE".equals(type)){
 			String openId = request.getParameter("openId");
 			String bal = request.getParameter("balance");
@@ -212,5 +235,21 @@ public class LeaguerFirm {
 		}
 		
 		return leaguers;
+	}
+	
+	@RequestMapping("/LeaguerAccess")
+	public String leaguerAccess(HttpServletRequest request)
+	{
+		String code = request.getParameter("code");
+		
+		String openId = WXUtils.getOpenId(request,code);
+		
+		Leaguer leaguer = leaguerService.getUserByOpenid(openId);
+		
+		if(leaguer == null){
+			return "/Front-Root/leaguer/leaguer-register.html?openId="+openId;
+		}else{
+			return "/Front-Root/leaguer/leaguer-info.html?openId="+openId;
+		}
 	}
 }

@@ -1,67 +1,65 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />  
-		<title>安全中心</title>
-		<link rel="stylesheet" href="css/leaguer-repwd.css">
-	</head>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>安全中心</title>
+<link rel="stylesheet" type="text/css" href="../Front-Root/leaguer/css/leaguer-repwd.css">
+</head>
+
 <body>
+
+<div id="_centent">
 	<div class="head">
-		<br>
-		安全中心
+		<div class="head-dsb">
+			<p class="dsb-name">密码修改</p>
+		</div>
 	</div>
-	<div class="main">
-		<input name="openId" type="hidden">
-		<table width="100%">
-			<tr>
-				<td align=right width=50% valign="middle">openId</td>
-				<td align=left width=50% valign="middle">
-					<input class="openId" name="openId" placeholder="">
-				</td>
-			</tr>
-			<tr>
-				<td align=right width=50% valign="middle">初始密码</td>
-				<td align=left width=50% valign="middle">
-					<input class="oldPwd" name="oldPwd" placeholder="请输入初始支付密码">
-				</td>
-			</tr>
-			<tr>
-				<td align=right valign="middle">新密码</td>
-				<td align=left valign="middle">
-					<input class="userPwd" name="userPwd" placeholder="请输入新密码">
-				</td>
-			</tr>
-			<tr>
-				<td align=right valign="middle">确认密码</td>
-				<td align=left valign="middle">
-					<input class="sec-userPwd" name="sec-userPwd" placeholder="再次输入新密码">
-				</td>
-			</tr>
-			<tr>
-				<td align=right valign="middle">
-					<button>发送短信验证码</button>
-				</td>
-				<td align=left valign="middle">
-					<input placeholder="请输入您接收到的手机验证码">
-				</td>
-			</tr>
-			<tr>
-				<td align=center colspan=3>
-					<br>
-					<br>
-					<button id="sub-btn">确认修改</button>
-				</td>
-				<tr>
-				<td align=center colspan=3>
-					<br>
-					<br>
-					<span class="msg"></span>
-				</td>
-			</tr>
-		</table>
-	</div>
-	<script src="js/jquery-min.js"></script>
-  	<script src="js/leaguer-repwd.js"></script>
+	<section class="mt-1">
+		<input id="openId" name="openId" type="hidden" value="poasjdjdfjksjkasd" >
+		<input id="userPhone" name="userPhone" type="hidden" value="">
+		<input id="codetemp" type="hidden" value=""/>
+	    <div class="ps-lt">
+	        <div class="lt-dsb">
+	            <p>新密码</p>
+	            <input class="arr-left" id="userPwd" name="userPwd" type="password">
+	        </div>
+	    </div>
+	    <div class="ps-lt">
+	        <div class="lt-dsb">
+	            <p>确认密码</p>
+	            <input class="arr-left" id="sec-userPwd" name="sec-userPwd" type="password">
+	        </div>
+	    </div>
+	    <div class="ps-lt">
+	        <div class="lt-dsb">
+	            <p>验证码</p>
+            	<input class="arr-left" id="code" name="code">
+            	<button class="code-btn">获 取</button>
+	        </div>
+	    </div>
+	</section>
+	<section class="mt-1">
+	    <div id="msgcontain" class="ps-lt">
+	        <div class="lt-dsb-msg">
+	        	<p id="msg"></p>
+	        </div>
+	    </div>
+	</section>
+	
+	<section class="mt-2">
+		<div class="ps-lt-button sub-btn">
+	        <div class="lt-dsb-button">
+	        	<p>确认修改</p>
+	        </div>
+	    </div>
+	</section>
+	
+	<div class="jg"></div>
+</div>
+
+<script src="../Front-Root/leaguer/js/jquery-min.js"></script>
+<script src="../Front-Root/leaguer/js/leaguer-repwd.js"></script>
 </body>
 </html>

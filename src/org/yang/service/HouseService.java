@@ -70,10 +70,12 @@ public class HouseService implements HouseServiceImpl {
 	public int destineOrder(Destine destine) {
 		// TODO Auto-generated method stub
 		//排除无效的参数
-		if(destine == null || destine.testForDestine()) return -1;
+		if(destine == null || !destine.testForDestine()) return -1;
 		//判断余额是否可以完成支付
 		Leaguer leaguer = leaguerDao.getUserById(destine.getOpenid());
+		
 		if(leaguer == null) return -1;
+		
 		if(leaguer.getBalance() < destine.getAmount()) return 0;
 		
 		//产生订房系统的order

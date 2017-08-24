@@ -1,39 +1,50 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />  
-		<title>会员充值中心</title>
-		<link rel="stylesheet" href="css/leaguer-recharge.css">
-	</head>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>会员中心</title>
+<link rel="stylesheet" type="text/css" href="../Front-Root/leaguer/css/leaguer-recharge.css">
+</head>
+
 <body>
+
+<div id="_centent">
 	<div class="head">
-		<br>
-		充值中心
+		<div class="head-dsb">
+			<p class="dsb-name">充值中心</p>
+		</div>
 	</div>
-	<div class="main">
-		<input id="openId" name="openId" value="sdfkhjsdkfhkjdfsd">
-		<table width="100%">
-<!-- 			<tr> -->
-<!-- 				<td align=right valign="middle"><img src="images/con1.png"></td> -->
-<!-- 				<td align=center valign="middle"><img src="images/con2.png"></td> -->
-<!-- 				<td align=left valign="middle"><img src="images/con3.png"></td> -->
-<!-- 			</tr> -->
-			<tr>
-				<td align=center colspan=3><br><input id="balance" placeholder="请输入金额"></td>
-			</tr>
-			<tr>
-				<td align=center colspan=3><br></td>
-			</tr>
-			<tr>
-				<td align=center colspan=3><br></td>
-			</tr>
-			<tr>
-				<td align=center colspan=3><button class="sub-btn">确认充值</button></td>
-			</tr>
-		</table>
-	</div>
-	<script src="js/jquery-min.js"></script>
-  	<script src="js/leaguer-recharge.js"></script>
+	<section class="mt-1">
+	    <div class="ps-lt">
+	        <div class="lt-dsb">
+	            <p>充值金额</p>
+	            <i class="arr-left"><input id="balance" name="balance" type="number"></i>
+	        </div>
+	        <input id="openId" name="openId" type="hidden" value=""/>
+	    </div>
+	    <div id="msgcontain" class="ps-lt">
+	        <div class="lt-dsb-msg">
+	        	<p id="msg"></p>
+	        </div>
+	    </div>
+	</section>
+	
+	<section class="mt-2">
+		<div class="ps-lt-button sub-btn">
+	        <div class="lt-dsb-button">
+	        	<p>确认充值</p>
+	        </div>
+	    </div>
+	</section>
+	
+	<div class="jg"></div>
+</div>
+<footer>
+</footer>
+
+<script src="../Front-Root/leaguer/js/jquery-min.js"></script>
+<script src="../Front-Root/leaguer/js/leaguer-recharge.js"></script>
 </body>
 </html>

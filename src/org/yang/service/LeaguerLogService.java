@@ -1,5 +1,6 @@
 package org.yang.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -30,4 +31,10 @@ public interface LeaguerLogService {
 	 * @function 用户记录的条件查询
 	 */
 	public List<LeaguerLog> queryByCondition(Map<String,Object> paramMap,String lo,String hi);
+	
+	/**
+	 * @param leaguer 
+	 * @function 创建用户充值记录
+	 */
+	public void createLog(LeaguerLog leaguerLog);
 }

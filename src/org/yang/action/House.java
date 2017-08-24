@@ -44,7 +44,7 @@ public class House {
 		if(code == null || "".equals(code) || state == null || "".equals(state))
 			return "/Front-Root/404.html";
 		//验证会员信息是否存在,不存在则进行会员绑定信息
-		System.out.println("openid:" + WXUtils.getOpenId(request , code));
+		
 		//将openid放置在会话域范围内
 		request.getSession().setAttribute("openid", WXUtils.getOpenId(request , code));
 		//将可以预定的房间放在页面中进行展示
@@ -102,6 +102,8 @@ public class House {
 	@RequestMapping("/destine")
 	public @ResponseBody String destine(HttpServletRequest request , Destine destine)
 	{
+		String openid = (String) request.getSession().getAttribute("openid");
+		destine.setOpenid(openid);
 		//排除空参数的影响
 		if(!destine.testForDestine()) return "参数存在错误,请矫正";
 		
@@ -109,6 +111,7 @@ public class House {
 		{
 			case 0:return "提交订单失败,请检测您的账户余额";
 			case 1:return "已提交订单,请等待管理员审核";
+			case -1:return "执行service出错";
 			default:return "提交订单失败,请重新提交";
 		}
 	}
@@ -230,7 +233,10 @@ public class House {
 		List<Map<String, Object>> temp = new ArrayList<Map<String, Object>>();
 		for (HouseOrder order : list) {
 			Map<String, Object> map = new HashMap<String, Object>();
+			
 			map.put("house", order.getHouse().getId());
+			map.put("type", order.getHouse().getType());
+			map.put("username", order.getLeaguer().getUserName());
 			map.put("arriveTime", order.getArriveTime());
 			map.put("activeTime", order.getActiveTime());
 			map.put("auditing", order.getAuditing());

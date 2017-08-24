@@ -1,9 +1,7 @@
 package org.yang.action;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,12 +9,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.yang.javabeans.FoodOrder;
 import org.yang.service.FoodOrderService;
 
-import utils.HttpRequest;
 import utils.WXUtils;
 
 
@@ -59,6 +54,8 @@ public class FoodOrderAction {
 			request.setAttribute("nums2", nums2);
 			return "/Food-style/index.jsp";
 		} else if (manager.equals("wfhaxct0352") && magPwd.equals("wfhaxct0352")) {
+			HttpSession session = request.getSession();
+			session.setAttribute("manager", "西餐厅");
 			List<FoodOrder> foodOrderList = foodOrderService.QueryAll("西餐厅");
 			int nums = 0;
 			int nums1 = 0;
@@ -82,6 +79,8 @@ public class FoodOrderAction {
 			request.setAttribute("nums2", nums2);
 			return "/Food-style/index.jsp";
 		} else if (manager.equals("wfhahct0352") && magPwd.equals("wfhahct0352")) {
+			HttpSession session = request.getSession();
+			session.setAttribute("manager", "韩餐厅");
 			List<FoodOrder> foodOrderList = foodOrderService.QueryAll("韩餐厅");
 			int nums = 0;
 			int nums1 = 0;
@@ -307,14 +306,14 @@ public class FoodOrderAction {
 	}
 
 	@RequestMapping("/FoodOrderEnd")
-	public String foodOrderEnd(HttpServletRequest request) {
+	public String foodOrderEnd(HttpServletRequest request,HttpSession session) {
 		request.removeAttribute("manager");
 		request.removeAttribute("message");
 		request.removeAttribute("foodOrderList");
 		request.removeAttribute("nums");
 		request.removeAttribute("nums1");
 		request.removeAttribute("nums2");
-
+		session.removeAttribute("manager");
 		return "/Food-style/login.jsp";
 	}
 	@RequestMapping("/FoodOrderAccess")

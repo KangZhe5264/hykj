@@ -1,47 +1,67 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />  
-		<title>会员信息</title>
-		<link rel="stylesheet" href="css/leaguer-info.css">
-	</head>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>会员中心</title>
+<link rel="stylesheet" type="text/css" href="../Front-Root/leaguer/css/leaguer-info.css">
+</head>
+
 <body>
-	<div class="head">
-		<div class="head-center"> 
-			<input id="openId" name="openId" type="hidden" value="sdfkhjsdkfhkjdfsd">
-			<table width=100%>
-				<tr>
-					<td colspan=3 align=center> <br></td>
-				</tr>
-				<tr>
-					<td width=45% rowspan="3" align="right" valign="middle">
-						<img src="images/paaa.png">
-					</td>
-					<td width=10% align=right><img src="images/user.png"></td>
-					<td width=45% align="left" valign="middle">姓名:<span id="userName"></span></td>
-				</tr>
-				<tr>
-					<td width=10% align=right></td>
-					<td align=left valign="middle">等级:<span id="levalName"></span></td>
-				</tr>
-				<tr>
-					<td width=10% align=right><img src="images/cash.png"></td>
-					<td align=left valign="middle">余额:<span id="balance"></span></td>
-				</tr>
-			</table>
-		</div>
-	</div>
-	<div class="main">
-		<table width="100%">
-			<tr>
-				<td id="recharge" align=right valign="middle"><img src="images/con1.png"></td>
-				<td id="record" align=center valign="middle"><img src="images/con2.png"></td>
-				<td id="repwd" align=left valign="middle"><img src="images/con3.png"></td>
-			</tr>
-		</table>
-	</div>
-	<script src="js/jquery-min.js"></script>
-  	<script src="js/leaguer-info.js"></script>
+
+<div id="_centent">
+<div class="head">
+	<div class="head-img">
+    	<img src="../Front-Root/leaguer/images/head-img.png">
+    </div>
+    <div class="head-dsb">
+    	<p id="userName" class="dsb-name"></p>
+        <p id="balance" class="dsb-id"></p>
+        <input id="openId" type="hidden" value=""/>
+        <input id="levalId" type="hidden" value=""/>
+    </div>
+</div>
+
+<section class="mt-1"> 
+    <div class="ps-lt" id="recharge">
+        <div class="lt-dsb">
+            <p>会员充值</p>
+            <i class="arr-right"></i>
+        </div>
+    </div>
+    <div class="ps-lt" id="repwd">
+        <div class="lt-dsb">
+            <p>修改密码</p>
+            <i class="arr-right"></i>
+        </div>
+    </div>
+    <div class="ps-lt" id="record">
+        <div class="lt-dsb">
+            <p>充值记录</p>
+            <i class="arr-right"></i>
+        </div>
+    </div>
+</section>
+
+<div class="jg"></div>
+</div>
+<footer>
+	<div class="mune">
+    	<img src="../Front-Root/leaguer/images/1.png">
+        <p>我要订房</p>
+    </div>
+	<div class="mune">
+    	<img src="../Front-Root/leaguer/images/2.png">
+        <p>我要订餐</p>
+    </div>
+	<div class="mune">
+    	<img src="../Front-Root/leaguer/images/4.png">
+        <p>我的卡券</p>
+    </div>    
+</footer>
+
+<script src="../Front-Root/leaguer/js/jquery-min.js"></script>
+<script src="../Front-Root/leaguer/js/leaguer-info.js"></script>
 </body>
 </html>

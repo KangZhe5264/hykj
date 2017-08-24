@@ -738,11 +738,11 @@ function refur_this()
 					if(data[index].auditing == "-1")
 					{
 						var li = document.createElement("li");
-						li.setAttribute("data",data[index].serail);
+						li.setAttribute("data",data[index].house);
 						wait.appendChild(li);
 						
 						var label = document.createElement("label");
-						label.innerHTML = data[index].userName + "预定" + data[index].type + data[index].amount + "间,预计在" + data[index].arriveTime +"到达,预定时长为" + data[index].activeTime + "。联系电话为" + data[index].contactPhone;                    
+						label.innerHTML = data[index].username + "预定" + data[index].type + data[index].quantity + "间,预计在" + data[index].arriveTime +"到达,预定时长为" + data[index].activeTime + "。联系电话为" + data[index].contactPhone;                    
 						wait.appendChild(label);
 						
 						var br = document.createElement("br");

@@ -42,4 +42,10 @@ public class LeaguerLogServiceImpl implements LeaguerLogService{
 		return logs;
 	}
 
+	@Override
+	public void createLog(LeaguerLog leaguerLog) {
+		// TODO Auto-generated method stub
+		leaguerLogDao.add(leaguerLog);
+	}
+
 }
